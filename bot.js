@@ -6,7 +6,8 @@ const prefix = '!';
 
 const client = new commando.Client({
     commandPrefix: prefix,
-    owner: ['132972681703194625']
+    owner: ['132972681703194625'],
+    unknownCommandResponse: false
 });
 
 client.registry

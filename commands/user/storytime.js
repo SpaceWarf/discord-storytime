@@ -23,7 +23,7 @@ module.exports = class Storytime extends Command {
                 }
             ]
         });
-        this.loopCntr = 0;
+        this.loopCntr = 1;
     }
 
     async addRepeatOption(frames, message) {
@@ -32,9 +32,17 @@ module.exports = class Storytime extends Command {
         };
 
         await message.react(repeatEmoji);
-        await message.awaitReactions(filter, { max: 2 });
-        await message.reactions.get(repeatEmoji).remove();
-        this.renderFrames(frames, message);
+        message.awaitReactions(filter, { max: 2, time: 60000, errors: ['time'] })
+            .then(() => {
+                const repeatReaction = message.reactions.get(repeatEmoji);
+                for (const user of repeatReaction.users.values()) {
+                    repeatReaction.remove(user);
+                }
+                this.renderFrames(frames, message);
+            })
+            .catch(() => {
+                message.reactions.get(repeatEmoji).remove();
+            });
     }
 
     renderFrames(frames, message) {
@@ -45,7 +53,7 @@ module.exports = class Storytime extends Command {
                 this.renderFrames(frames, message);
             } else {
                 this.loopCntr = 0;
-                // this.addRepeatOption(frames, message);
+                this.addRepeatOption(frames, message);
             }
         }, 1500);
     }
@@ -56,7 +64,7 @@ module.exports = class Storytime extends Command {
             await message.say("No story with that name. Use **!list** to see all the available stories.");
         } else {
             this.renderFrames(
-                story.frames.slice(1, story.frames.length),
+                story.frames,
                 await message.say(story.frames[0])
             );
         }
