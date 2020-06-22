@@ -1,7 +1,7 @@
 const { Command } = require("discord.js-commando");
 const stories = require("../config/stories.config");
 
-module.exports = class Storytime extends Command {
+module.exports = class List extends Command {
     constructor(client) {
         super(client, {
             name: "list",
