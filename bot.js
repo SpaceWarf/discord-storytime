@@ -12,7 +12,7 @@ const client = new commando.Client({
 client.registry
     .registerDefaultTypes()
     .registerGroups([
-        ['user', 'User']
+        ['user', 'User Commands']
     ])
     .registerDefaultGroups()
     .registerDefaultCommands()
