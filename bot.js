@@ -14,8 +14,6 @@ client.registry
     .registerGroups([
         ['user', 'User Commands']
     ])
-    .registerDefaultGroups()
-    .registerDefaultCommands()
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.on('ready', () => {
