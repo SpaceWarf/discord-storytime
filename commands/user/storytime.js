@@ -53,7 +53,7 @@ module.exports = class Storytime extends Command {
                 this.renderFrames(frames, message);
             } else {
                 this.loopCntr = 0;
-                this.addRepeatOption(frames, message);
+                // this.addRepeatOption(frames, message);
             }
         }, 1500);
     }
