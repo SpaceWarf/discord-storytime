@@ -1,5 +1,4 @@
 const { Command } = require("discord.js-commando");
-const stories = require("../config/stories.config");
 
 module.exports = class Help extends Command {
     constructor(client) {
@@ -12,6 +11,13 @@ module.exports = class Help extends Command {
     }
 
     async run(message) {
-        message.say(`**!list**: Lists available stories\n**!storytime <story>**: Watch a nice story`);
+        message.say(
+            `__**Storytime**__`
+            + `\n**!storytime <story>** - Watch a nice story`
+            + `\n**!list** - Lists available stories`
+
+            + `\n\n__**Twitch**__`
+            + `\n**!live** - List all channels live on Twitch`
+        );
     }
 }

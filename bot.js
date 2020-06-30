@@ -1,6 +1,9 @@
 require('dotenv').config();
 const path = require('path');
 const commando = require('discord.js-commando');
+const TwitchMonitor = require('./twitch/twitch-monitor');
+const StreamActivity = require('./twitch/stream-activity');
+const { alertChannel, customAlerts } = require('./config/twitch.config');
 
 const prefix = '!';
 
@@ -18,7 +21,33 @@ client.registry
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.on('ready', () => {
-    console.log("Connected as " + client.user.tag);
+    console.log('[Bot] Connected as ' + client.user.tag);
+    StreamActivity.init();
+    TwitchMonitor.start();
 });
+
+/**
+ * Twitch integration based on the Timbot from github:
+ * https://github.com/roydejong/timbot/tree/fd16e7fe706ea8e9b19e3fbff29aa45f463a0585
+ */
+
+TwitchMonitor.onChannelLiveUpdate((streamData, isOnline) => {
+    if (isOnline && !StreamActivity.isChannelOnline(streamData)) {
+        StreamActivity.setChannelOnline(streamData);
+        const channel = client.channels.find('name', alertChannel);
+        channel.send(getCustomAlertMessage(streamData.user_name, streamData.title));
+    }
+});
+
+TwitchMonitor.onChannelOffline((streamData) => {
+    StreamActivity.setChannelOffline(streamData);
+});
+
+const getCustomAlertMessage = (username, title) => {
+    let customAlert = customAlerts[username.toLowerCase()] || customAlerts.default;
+    customAlert = customAlert.replace(/%u%/g, username);
+    customAlert = customAlert.replace(/%t%/g, title);
+    return customAlert;
+}
 
 client.login(process.env.TOKEN);

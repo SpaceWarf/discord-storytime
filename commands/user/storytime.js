@@ -1,5 +1,5 @@
 const { Command } = require("discord.js-commando");
-const stories = require("../config/stories.config");
+const stories = require("../../config/stories.config");
 
 const repeatEmoji = "🔁";
 
