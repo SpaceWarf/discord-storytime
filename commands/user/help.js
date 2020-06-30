@@ -17,7 +17,8 @@ module.exports = class Help extends Command {
             + `\n**!list** - Lists available stories`
 
             + `\n\n__**Twitch**__`
-            + `\n**!live** - List all channels live on Twitch`
+            + `\n**!live** - List all live channels`
+            + `\n**!streams** - List all channels (live or not)`
         );
     }
 }
