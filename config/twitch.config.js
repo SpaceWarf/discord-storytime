@@ -5,8 +5,9 @@ const usernames = [
     "seajunior",
     "hahaitscel",
     "digitalcafe",
+    "megimedia",
     "peruman95",
-    "ossymoon"
+    "ossymoon",
 ];
 
 const pollingInterval = 90000;
