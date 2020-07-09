@@ -8,6 +8,7 @@ const usernames = [
     "megimedia",
     "peruman95",
     "ossymoon",
+    "phant0mpup"
 ];
 
 const pollingInterval = 90000;
