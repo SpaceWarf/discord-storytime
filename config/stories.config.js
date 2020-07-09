@@ -1,6 +1,7 @@
 const kcfPepChamp = "<:kcfPepChamp:698712776444739665>";
 const kcfSpRump = "<:kcfSpRump:245871771516010496>";
 const kcfConcerned = "<:kcfConcerned:230126183243579402>";
+const kcfCreep = "<:kcfCreep:274345664853573632>";
 const bonkCat = "<a:bonk_cat:718661582099316861>";
 const sadChamp = "<:SadChamp:724545242027655188>";
 const pog = "<:POG:724545242191233134>";
@@ -14,6 +15,7 @@ const jojo4 = "<a:jojo1:718602178893447259>";
 const gun = "<:gun_hand:724558785078886451>";
 const ugh = "<:oh_crap:718610051224436776>";
 const bobDance = "<a:bobdance:722116417175945320>";
+const wall = "<:wall:730629197550190594>";
 
 const batterUp = [
     `${kcfPepChamp}:tomato:             ${kcfSpRump}:newspaper2:`,
@@ -93,6 +95,21 @@ const adhd = [
     `⠀                     ${kcfSpRump}${bonkCat}`
 ];
 
+const koolaid = [
+    `⠀${kcfCreep}         ${wall}`,
+    `⠀ ${kcfCreep}        ${wall}`,
+    `⠀  ${kcfCreep}       ${wall}`,
+    `⠀   ${kcfCreep}      ${wall}`,
+    `⠀    ${kcfCreep}     ${wall}`,
+    `⠀     ${kcfCreep}    ${wall}`,
+    `⠀      ${kcfCreep}   ${wall}`,
+    `⠀       ${kcfCreep}  ${wall}`,
+    `⠀        ${kcfCreep} ${wall}`,
+    `⠀         ${kcfCreep}${wall}`,
+    `⠀         :boom:${kcfCreep}`,
+    `⠀               ${kcfCreep} "OH YEAH!"`
+]
+
 module.exports = {
     "batter-up": {
         frames: batterUp,
@@ -113,5 +130,9 @@ module.exports = {
     "adhd": {
         frames: adhd,
         description: "All truths are not good to tell."
+    },
+    "koolaid": {
+        frames: koolaid,
+        description: "OH YEAH!"
     }
 };
