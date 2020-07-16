@@ -31,7 +31,7 @@ class CustomEmbed {
                 "author": {
                     "name": streamData.user_name,
                     "url": `http://www.twitch.tv/${streamData.user_name}`,
-                    // "icon_url": channelInfo[0].profile_image_url
+                    "icon_url": channelInfo[0].profile_image_url
                 },
                 "fields": this.getFormattedFields(gameInfo, tagsInfo)
             }

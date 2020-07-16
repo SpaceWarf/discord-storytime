@@ -1,13 +1,14 @@
 # Meowtron 6000
 
-The custom bot for the Kitty Cat Friends Discord server. It has a set of features for user engagement and streamer visibility. Very much a WIP, more features will be added as the need for them arises.
+The custom bot for the KittyCatFriends Discord server. It has a set of features for user engagement and streamer visibility. Very much a WIP, more features will be added as the need for them arises.
 
 ## Usage
+
+**!help**: Display a helpful help message.  
 
 ### Storytime
 These commands will display "animated" messages in the server.
 
-**!help**: Display a helpful help message.  
 **!list**: List all the available stories.  
 **!story**: Watch a nice story.  
 
