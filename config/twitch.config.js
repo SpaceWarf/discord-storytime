@@ -13,7 +13,7 @@ const usernames = [
 
 const pollingInterval = 60000;
 
-const alertChannel = "the-lab";
+const alertChannel = "bot-channel-🤖";
 
 /**
  * Color code reference can be found here:
