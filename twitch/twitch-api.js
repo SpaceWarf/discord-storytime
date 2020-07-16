@@ -44,6 +44,51 @@ class TwitchApi {
                 });
         });
     }
+
+    static fetchGameInfo(gameId) {
+        return new Promise((resolve, reject) => {
+            axios.get(`/games?id=${gameId}`, this.requestOptions)
+                .then((res) => {
+                    resolve(res.data.data || []);
+                })
+                .catch((err) => {
+                    this.handleApiError(err);
+                    reject(err);
+                });
+        });
+    }
+
+    /**
+     * Take into consideration that the current Twitch API does not return tags
+     * applied by game selection in their tags API routes. For example, the tag
+     * 'FPS' applied by the game 'Call of Duty' will not be returned. But the
+     * language tags and the manually added tags will be.
+     */
+    static fetchTagsInfo(tagIds) {
+        return new Promise((resolve, reject) => {
+            axios.get(`/tags/streams?tag_id=${tagIds.join("&tag_id=")}`, this.requestOptions)
+                .then((res) => {
+                    resolve(res.data.data || []);
+                })
+                .catch((err) => {
+                    this.handleApiError(err);
+                    reject(err);
+                });
+        });
+    }
+
+    static fetchUserInfo(id) {
+        return new Promise((resolve, reject) => {
+            axios.get(`/users?id=${id}`, this.requestOptions)
+                .then((res) => {
+                    resolve(res.data.data || []);
+                })
+                .catch((err) => {
+                    this.handleApiError(err);
+                    reject(err);
+                });
+        });
+    }
 }
 
 module.exports = TwitchApi;
