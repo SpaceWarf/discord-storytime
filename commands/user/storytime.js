@@ -19,7 +19,8 @@ module.exports = class Storytime extends Command {
                 {
                     key: "storyName",
                     prompt: "What story do you want to see?",
-                    type: "string"
+                    type: "string",
+                    default: "random"
                 }
             ]
         });
@@ -39,7 +40,11 @@ module.exports = class Storytime extends Command {
     }
 
     async run(message, { storyName }) {
-        const story = stories[storyName];
+        const keys = Object.keys(stories);
+        let story = storyName === "random"
+            ? stories[keys[ keys.length * Math.random() << 0]]
+            : stories[storyName];
+
         if (!story) {
             await message.say("No story with that name. Use **!list** to see all the available stories.");
         } else {

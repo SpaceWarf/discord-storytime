@@ -25,11 +25,15 @@ module.exports = class Help extends Command {
                 "fields": [
                     {
                         "name": "Storytime",
-                        "value": "`!story <story>`\nWatch a nice animated story\n\n`!list`\nLists available stories\n⠀"
+                        "value": "`!story <story>`\nWatch a nice animated story\nPassing no story plays a random one\n\n`!list`\nLists available stories\n⠀"
                     },
                     {
                         "name": "Twitch",
-                        "value": "`!live <story>`\nList all live channels\n\n`!streams`\nList all channels (live or not)\n\nMeowtron's code is freely available [here](https://github.com/SpaceWarf/meowtron-6000)."
+                        "value": "`!live`\nList all live channels\n\n`!streams`\nList all channels (live or not)\n⠀"
+                    },
+                    {
+                        "name": "Other",
+                        "value": "`!pep <count>`\nEmulate that stupid bitch\nDefault count is 1 with a max of 5\n\nMeowtron's code is freely available [here](https://github.com/SpaceWarf/meowtron-6000)."
                     }
                 ]
             }
