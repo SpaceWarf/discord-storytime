@@ -1,5 +1,7 @@
 const Emojis = require("../config/emojis.config");
 
+const notARat = `IM NAWT A RAT`;
+
 const pepPhrases = [
   `danke u ${Emojis.dankeu} !!`,
   `HJDAKSNDSF`,
@@ -15,7 +17,7 @@ const pepPhrases = [
   `YELL HEAH`,
   `yell heah ${Emojis.kcfPepChamp}`,
   `weba`,
-  `IM NAWT A RAT`,
+  `${notARat}`,
   `//bonks u ${Emojis.bonkCat}`,
   `//waves at u`,
   `//throws a water bottle at you`,
@@ -23,7 +25,6 @@ const pepPhrases = [
   `-pats u-`,
   `i havent slept yet`,
   `**yommy** ${Emojis.pogTasty}`,
-  `!rat`,
   `Oooo ${Emojis.kcfPepChamp}`,
   `${Emojis.elmayo}`,
   `${Emojis.hey}`,
@@ -35,9 +36,11 @@ const pepPhrases = [
   `AAAAAAAAAAAAAAA`,
   `EY ${Emojis.pardon}`,
   `goody good good`,
-  `EXCUSE MOI`
+  `EXCUSE MOI`,
+  `SEA JR SEA JR SEA JR`
 ];
 
 module.exports = {
-  pepPhrases
+  pepPhrases,
+  notARat
 };

@@ -1,5 +1,5 @@
 const { Command } = require("discord.js-commando");
-const { pepPhrases } = require("../../config/pep.config");
+const { pepPhrases, notARat } = require("../../config/pep.config");
 
 module.exports = class Pep extends Command {
     constructor(client) {
@@ -24,8 +24,24 @@ module.exports = class Pep extends Command {
     }
 
     async run(message, { count }) {
-      for (let i = 0; i < Math.min(count, 5); i++) {
-        message.say(pepPhrases[Math.floor(Math.random() * pepPhrases.length)]);
-      }
+        const lastUserMessage = await this.getLastUserMessage(message.channel, message.author.id);
+        const isRatRelated = message.content.includes("rat") || lastUserMessage.content.includes("rat");
+        const messages = isRatRelated ? [notARat] : [];
+
+        while (messages.length < count) {
+            messages.push(pepPhrases[Math.floor(Math.random() * pepPhrases.length)]);
+        }
+        message.say(messages.join("\n"));
+    }
+
+    async getMessagesForUser(channel, userId) {
+        let messages = await channel.fetchMessages();
+        return messages.filter(message => message.author.id === userId);
+    }
+
+    async getLastUserMessage(channel, userId) {
+        const userMessages = await this.getMessagesForUser(channel, userId);
+        const lastUserMessageTimestamp = userMessages.map(msg => msg.createdTimestamp)[1];
+        return userMessages.find(msg => msg.createdTimestamp === lastUserMessageTimestamp);
     }
 }
