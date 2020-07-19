@@ -45,13 +45,19 @@ const colors = {
     DARK_VIVID_PINK: 12320855
 };
 
+const defaultMessage = "@everyone %u% just went live! http://www.twitch.tv/%u%";
+
 const customAlerts = {
     "space_warf": {
         message: "@everyone The rat bastard himself just went live! :rat: http://www.twitch.tv/%u%",
         color: colors.RED
     },
+    "peruman95": {
+        message: defaultMessage,
+        color: colors.RED
+    },
     "default": {
-        message: "@everyone %u% just went live! http://www.twitch.tv/%u%",
+        message: defaultMessage,
         color: colors.BLUE
     }
 };
