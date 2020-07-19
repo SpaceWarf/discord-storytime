@@ -14,6 +14,7 @@ const usernames = [
 const pollingInterval = 60000;
 
 const alertChannel = "bot-channel-🤖";
+// const alertChannel = "the-lab";
 
 /**
  * Color code reference can be found here:
@@ -51,6 +52,10 @@ const customAlerts = {
     "space_warf": {
         message: "@everyone The rat bastard himself just went live! :rat: http://www.twitch.tv/%u%",
         color: colors.RED
+    },
+    "seajunior": {
+        message: defaultMessage,
+        color: colors.AQUA
     },
     "peruman95": {
         message: defaultMessage,
