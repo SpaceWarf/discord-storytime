@@ -6,7 +6,7 @@ const StreamActivity = require('./twitch/stream-activity');
 const { alertChannel } = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
 
-const prefix = '!';
+const prefix = '~';
 
 const client = new commando.Client({
     commandPrefix: prefix,

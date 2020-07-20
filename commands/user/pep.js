@@ -11,27 +11,28 @@ module.exports = class Pep extends Command {
             throttling: {
                 usages: 1,
                 duration: 5
-            },
-            args: [
-                {
-                    key: "count",
-                    prompt: "How many messages to send?",
-                    type: "integer",
-                    default: 1
-                }
-            ]
+            }
         });
     }
 
-    async run(message, { count }) {
+    async run(message) {
+        const count = this.getCountFromMessage(message.content);
         const lastUserMessage = await this.getLastUserMessage(message.channel, message.author.id);
-        const isRatRelated = message.content.includes("rat") || lastUserMessage.content.includes("rat");
-        const messages = isRatRelated ? [notARat] : [];
+        const messages = this.getInitialMessageArray(message, lastUserMessage);
 
-        while (messages.length < count) {
+        while (messages.length < Math.min(count, 5)) {
             messages.push(pepPhrases[Math.floor(Math.random() * pepPhrases.length)]);
         }
         message.say(messages.join("\n"));
+    }
+
+    getCountFromMessage(message) {
+        let count = 1;
+        const countArg = message.split(" ")[1];
+        if (!isNaN(countArg)) {
+            count = +countArg;
+        }
+        return count;
     }
 
     async getMessagesForUser(channel, userId) {
@@ -42,6 +43,26 @@ module.exports = class Pep extends Command {
     async getLastUserMessage(channel, userId) {
         const userMessages = await this.getMessagesForUser(channel, userId);
         const lastUserMessageTimestamp = userMessages.map(msg => msg.createdTimestamp)[1];
-        return userMessages.find(msg => msg.createdTimestamp === lastUserMessageTimestamp);
+
+        // If the last found message if older than one minute, it's probably not related to the command
+        if (lastUserMessageTimestamp < (new Date()).getTime() - 60000) {
+            return { content: "" };
+        }
+
+        return userMessages.find(msg => msg.createdTimestamp === lastUserMessageTimestamp)
+            || { content: "" };
+    }
+
+    getInitialMessageArray(queryMessage, lastRelatedMessage) {
+        const messages = [];
+        const queryMsgContent = queryMessage.content.toLowerCase();
+        const lastRelatedMsgContent = lastRelatedMessage.content.toLowerCase();
+        const isRatRelated = queryMsgContent.includes("rat") || lastRelatedMsgContent.includes("rat");
+
+        if (isRatRelated) {
+            messages.push(notARat);
+        }
+
+        return messages;
     }
 }
