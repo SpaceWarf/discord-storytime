@@ -5,12 +5,13 @@ const TwitchMonitor = require('./twitch/twitch-monitor');
 const StreamActivity = require('./twitch/stream-activity');
 const { alertChannel } = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
+const { Ids } = require("./config/users.config");
 
-const prefix = '!';
+const prefix = '~';
 
 const client = new commando.Client({
     commandPrefix: prefix,
-    owner: ['132972681703194625'],
+    owner: [Ids.space],
     unknownCommandResponse: false
 });
 

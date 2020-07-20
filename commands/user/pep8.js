@@ -4,11 +4,11 @@ const {
     pepNo,
     pepMaybe,
     notARat,
-    peruId,
     peruMsg,
     fatFuckChance,
     noQuestion
 } = require("../../config/pep.config");
+const { Ids } = require("../../config/users.config");
 const { getRandomArrayElement } = require("../../utilities/array");
 const { getLastUserMessage } = require("../../utilities/messages");
 
@@ -27,7 +27,7 @@ module.exports = class Pep8 extends Command {
     }
 
     async run(message) {
-        if (message.author.id === peruId && Math.random() <= fatFuckChance) {
+        if (message.author.id === Ids.peru && Math.random() <= fatFuckChance) {
             message.say(peruMsg);
             return;
         }

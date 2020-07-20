@@ -25,6 +25,14 @@ const bobDance = "<a:bobdance:734222129045962815>";
 const wall = "<:wall:734222129180049428>";
 const pepehands = "<:pepehands:734613873528930385>";
 const crycat = "<:crycat:734616012611125339>";
+const blobcatknife = "<:blobcatknife:734652562955042886>";
+const catknife = "<:catknife:734652562690670613>";
+const googlecat = "<:googlecat:734652562854117507>";
+const googlecatheart = "<:googlecatheart:734652563059900456>";
+const agooglecat = "<a:agooglecat:734652562749259847>";
+const headpat = "<:headpat:734653928213577819>";
+const bananacat = "<:bananacat:734653927978696716>";
+const pepeeyes = "<:pepeeyes:734657820460580916>";
 
 module.exports = {
   dankeu,
@@ -53,5 +61,13 @@ module.exports = {
   bobDance,
   wall,
   pepehands,
-  crycat
+  crycat,
+  blobcatknife,
+  catknife,
+  googlecat,
+  googlecatheart,
+  agooglecat,
+  headpat,
+  bananacat,
+  pepeeyes
 };

@@ -1,6 +1,5 @@
 const Emojis = require("../config/emojis.config");
 
-const peruId = "141768226521612288";
 const peruMsg = `Shut up you fat fuck ${Emojis.bonkCat}`;
 const fatFuckChance = 0.2;
 
@@ -80,7 +79,6 @@ module.exports = {
   pepNo,
   pepMaybe,
   notARat,
-  peruId,
   peruMsg,
   fatFuckChance,
   noQuestion

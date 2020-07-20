@@ -33,7 +33,7 @@ module.exports = class Help extends Command {
                     },
                     {
                         "name": "Other",
-                        "value": "`!pep <count>`\nEmulate that stupid bitch\nDefault count is 1 with a max of 5\n\n`!pep8`\nSame as the pep command, but with a single yes/no/maybe answer.\n\nMeowtron's code is freely available [here](https://github.com/SpaceWarf/meowtron-6000)."
+                        "value": "`!pep <count>`\nEmulate that stupid bitch\nDefault count is 1 with a max of 5\n\n`!pep8`\nSame as the pep command, but with a single yes/no/maybe answer.\n\n`!frumpkin <count>`\nBecause we all need frumpkin in our lives\nDefault count is 1 with a max of 5\n\nMeowtron's code is freely available [here](https://github.com/SpaceWarf/meowtron-6000)."
                     }
                 ]
             }
