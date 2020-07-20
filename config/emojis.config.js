@@ -23,6 +23,8 @@ const gun = "<:gunhand:734222129519656980>";
 const ugh = "<:ohcrap:734223534154448968>";
 const bobDance = "<a:bobdance:734222129045962815>";
 const wall = "<:wall:734222129180049428>";
+const pepehands = "<:pepehands:734613873528930385>";
+const crycat = "<:crycat:734616012611125339>";
 
 module.exports = {
   dankeu,
@@ -49,5 +51,7 @@ module.exports = {
   gun,
   ugh,
   bobDance,
-  wall
+  wall,
+  pepehands,
+  crycat
 };

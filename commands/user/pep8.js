@@ -1,21 +1,24 @@
 const { Command } = require("discord.js-commando");
 const {
-    pepPhrases,
+    pepYes,
+    pepNo,
+    pepMaybe,
     notARat,
     peruId,
     peruMsg,
-    fatFuckChance
+    fatFuckChance,
+    noQuestion
 } = require("../../config/pep.config");
 const { getRandomArrayElement } = require("../../utilities/array");
 const { getLastUserMessage } = require("../../utilities/messages");
 
-module.exports = class Pep extends Command {
+module.exports = class Pep8 extends Command {
     constructor(client) {
         super(client, {
-            name: "pep",
+            name: "pep8",
             group: "user",
-            memberName: "pep",
-            description: "Emulate that stupid bitch.",
+            memberName: "pep8",
+            description: "Same as the pep command, but with a single yes/no/maybe answer.",
             throttling: {
                 usages: 1,
                 duration: 5
@@ -29,35 +32,32 @@ module.exports = class Pep extends Command {
             return;
         }
 
-        const count = this.getCountFromMessage(message.content);
         const lastUserMessage = await getLastUserMessage(message.channel, message.author.id);
-        const messages = this.getInitialMessageArray(message, lastUserMessage);
-
-        while (messages.length < Math.min(count, 5)) {
-            messages.push(getRandomArrayElement(pepPhrases));
-        }
-        message.say(messages.join("\n"));
+        message.say(
+            this.getMessage(message, lastUserMessage)
+        );
     }
 
-    getCountFromMessage(message) {
-        let count = 1;
-        const countArg = message.split(" ")[1];
-        if (!isNaN(countArg)) {
-            count = +countArg;
-        }
-        return count;
-    }
-
-    getInitialMessageArray(queryMessage, lastRelatedMessage) {
-        const messages = [];
+    getMessage(queryMessage, lastRelatedMessage) {
         const queryMsgContent = queryMessage.content.toLowerCase();
         const lastRelatedMsgContent = lastRelatedMessage.content.toLowerCase();
         const isRatRelated = queryMsgContent.includes("rat") || lastRelatedMsgContent.includes("rat");
 
         if (isRatRelated) {
-            messages.push(notARat);
+            return notARat;
         }
 
-        return messages;
+        if (
+            queryMsgContent.replace(/(!|~)pep8/g, "").length === 0 
+            && lastRelatedMsgContent.replace(/(!|~)pep8/g, "").length === 0
+        ) {
+            return noQuestion;
+        }
+
+        return getRandomArrayElement([
+            ...pepYes,
+            ...pepNo,
+            ...pepMaybe
+        ]);
     }
 }
