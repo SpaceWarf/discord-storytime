@@ -21,6 +21,5 @@ These commands help bring visibility our stream team. Meowtron also notifies the
 ### Other
 These commands aim to improve user engagements within the server as well as meme quality.
 
-**!pep <count>**: Emulate that stupid bitch. Default count is 1 with a max of 5.
-
+**!pep <count>**: Emulate that stupid bitch. Default count is 1 with a max of 5.  
 **!pep8**: Same as the pep command, but with a single yes/no/maybe answer.
