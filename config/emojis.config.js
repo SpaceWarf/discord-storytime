@@ -33,6 +33,10 @@ const agooglecat = "<a:agooglecat:734652562749259847>";
 const headpat = "<:headpat:734653928213577819>";
 const bananacat = "<:bananacat:734653927978696716>";
 const pepeeyes = "<:pepeeyes:734657820460580916>";
+const kittyplay = "<a:kittyplay:734953896413495326>";
+const bongocat = "<a:bongocat:734953895591280690>";
+const grabhandL = "<:grabhandL:734953895746600970>";
+const snap = "<:snap:734968630613245952>";
 
 module.exports = {
   dankeu,
@@ -69,5 +73,9 @@ module.exports = {
   agooglecat,
   headpat,
   bananacat,
-  pepeeyes
+  pepeeyes,
+  kittyplay,
+  bongocat,
+  grabhandL,
+  snap
 };

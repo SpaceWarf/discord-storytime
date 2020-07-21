@@ -1,6 +1,9 @@
-const Emojis = require("../config/emojis.config");
+const Emojis = require(`../config/emojis.config`);
 
 const eatsPep = `\\*eats pep\\*`;
+const snapIn = `\\*pops into existence\\*`;
+const snapOut = `\\*pops out of existence\\*`;
+const notHere = `Frumpkin isn't around`;
 
 const frumpkinPhrases = [
   `\\*blinks\\*`,
@@ -45,10 +48,35 @@ const frumpkinPhrases = [
   `\\*licks teacup\\*`,
   `\\*steals a post-it\\*`,
   `\\*yawns\\*`,
-  `\\*arches back and stretches\\*`
+  `\\*arches back and stretches\\*`,
+  `\\*jumps off table\\*`,
+  `\\*attacks blanket\\*`,
+  `\\*spills water bowl while ur back is turned\\*`,
+  `\\*meows so everyone knows hes going to the bathroom\\*`,
+  `miiiiw!!!`,
+  `\\*hides under dresser\\*`,
+  `\\*sits on ur lap\\*`,
+  `${Emojis.kittyplay}`,
+  `${Emojis.bongocat}`,
+  `${Emojis.grabhandL} \\*swipes\\*`,
+  `\\*is stinky\\*`,
+  `\\*trots with his tail up in the air like a happy little boi\\*`,
+  `\\*zooms through shark tunnel\\*`,
+  `\\*jumps on shark tunnel\\*`,
+  `\\*rummages through toybox\\*`,
+  `\\*meows for attention and then runs away\,*`,
+  `\\*hides\\*`,
+  `\\*murders rattle bird\\*`,
+  `\\*carries toy around\\*`,
+  `\\*appears with bath plug\\*`,
+  `\\*tears feather duster to sheads\\*`,
+  `\\*uses ur shoulders as a launch pad\\*`
 ];
 
 module.exports = {
   eatsPep,
+  snapIn,
+  snapOut,
+  notHere,
   frumpkinPhrases
 };
