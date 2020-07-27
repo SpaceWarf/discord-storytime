@@ -1,7 +1,7 @@
 const Emojis = require("../config/emojis.config");
 
 const peruMsg = `Shut up you fat fuck ${Emojis.bonkCat}`;
-const fatFuckChance = 0.2;
+const fatFuckChance = 0.7;
 
 const notARat = `IM NAWT A RAT`;
 const noQuestion = `u FOOL THERES NO QUESTION ${Emojis.bonkCat}`;

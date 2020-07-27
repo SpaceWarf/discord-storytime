@@ -7,7 +7,7 @@ const {
 } = require("../../config/pep.config");
 const { Ids } = require("../../config/users.config");
 const { getRandomArrayElement } = require("../../utilities/array");
-const { getLastUserMessage } = require("../../utilities/messages");
+const { getLastUserMessages } = require("../../utilities/messages");
 
 module.exports = class Pep extends Command {
     constructor(client) {
@@ -30,8 +30,8 @@ module.exports = class Pep extends Command {
         }
 
         const count = this.getCountFromMessage(message.content);
-        const lastUserMessage = await getLastUserMessage(message.channel, message.author.id);
-        const messages = this.getInitialMessageArray(message, lastUserMessage);
+        const lastUserMessages = await getLastUserMessages(message.channel, message.author.id);
+        const messages = this.getInitialMessageArray(lastUserMessages);
 
         while (messages.length < Math.min(count, 5)) {
             messages.push(getRandomArrayElement(pepPhrases));
@@ -48,11 +48,10 @@ module.exports = class Pep extends Command {
         return count;
     }
 
-    getInitialMessageArray(queryMessage, lastRelatedMessage) {
+    getInitialMessageArray(lastRelatedMessages) {
         const messages = [];
-        const queryMsgContent = queryMessage.content.toLowerCase();
-        const lastRelatedMsgContent = lastRelatedMessage.content.toLowerCase();
-        const isRatRelated = queryMsgContent.includes("rat") || lastRelatedMsgContent.includes("rat");
+        const isRatRelated = lastRelatedMessages
+            .some(message => message.content.toLowerCase().includes("rat"));
 
         if (isRatRelated) {
             messages.push(notARat);

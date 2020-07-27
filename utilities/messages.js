@@ -3,20 +3,17 @@ const getMessagesForUser = async (channel, userId) => {
   return messages.filter(message => message.author.id === userId);
 }
 
-const getLastUserMessage = async (channel, userId) => {
+const getLastUserMessages = async (channel, userId) => {
   const userMessages = await getMessagesForUser(channel, userId);
-  const lastUserMessageTimestamp = userMessages.map(msg => msg.createdTimestamp)[1];
+  const userMessagesTimestamps = userMessages
+    .map(msg => msg.createdTimestamp)
+    .filter(timestamp => timestamp >= new Date().getTime() - 60000);
 
-  // If the last found message if older than one minute, it's probably not related to the command
-  if (lastUserMessageTimestamp < (new Date()).getTime() - 60000) {
-    return { content: "" };
-  }
-
-  return userMessages.find(msg => msg.createdTimestamp === lastUserMessageTimestamp)
-    || { content: "" };
+  return userMessages.filter(msg => userMessagesTimestamps.includes(msg.createdTimestamp))
+    || [];
 }
 
 module.exports = {
   getMessagesForUser,
-  getLastUserMessage
+  getLastUserMessages
 };

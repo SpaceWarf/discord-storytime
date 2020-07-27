@@ -10,7 +10,7 @@ const {
 } = require("../../config/pep.config");
 const { Ids } = require("../../config/users.config");
 const { getRandomArrayElement } = require("../../utilities/array");
-const { getLastUserMessage } = require("../../utilities/messages");
+const { getLastUserMessages } = require("../../utilities/messages");
 
 module.exports = class Pep8 extends Command {
     constructor(client) {
@@ -32,16 +32,15 @@ module.exports = class Pep8 extends Command {
             return;
         }
 
-        const lastUserMessage = await getLastUserMessage(message.channel, message.author.id);
+        const lastUserMessages = await getLastUserMessages(message.channel, message.author.id);
         message.say(
-            this.getMessage(message, lastUserMessage)
+            this.getMessage(lastUserMessages)
         );
     }
 
-    getMessage(queryMessage, lastRelatedMessage) {
-        const queryMsgContent = queryMessage.content.toLowerCase();
-        const lastRelatedMsgContent = lastRelatedMessage.content.toLowerCase();
-        const isRatRelated = queryMsgContent.includes("rat") || lastRelatedMsgContent.includes("rat");
+    getMessage(lastRelatedMessages) {
+        const isRatRelated = lastRelatedMessages
+            .some(message => message.content.toLowerCase().includes("rat"));
 
         if (isRatRelated) {
             return notARat;

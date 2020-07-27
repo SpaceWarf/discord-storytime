@@ -7,7 +7,7 @@ const { alertChannel } = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
 const { Ids } = require("./config/users.config");
 
-const prefix = '!';
+const prefix = '~';
 
 const client = new commando.Client({
     commandPrefix: prefix,
