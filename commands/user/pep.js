@@ -3,7 +3,9 @@ const {
     pepPhrases,
     notARat,
     peruMsg,
-    fatFuckChance
+    fatFuckChance,
+    sassChance,
+    peptronSass
 } = require("../../config/pep.config");
 const { Ids } = require("../../config/users.config");
 const { getRandomArrayElement } = require("../../utilities/array");
@@ -26,6 +28,11 @@ module.exports = class Pep extends Command {
     async run(message) {
         if (message.author.id === Ids.peru && Math.random() <= fatFuckChance) {
             message.say(peruMsg);
+            return;
+        }
+
+        if (message.author.id === Ids.pep && Math.random() <= sassChance) {
+            message.say(getRandomArrayElement(peptronSass));
             return;
         }
 

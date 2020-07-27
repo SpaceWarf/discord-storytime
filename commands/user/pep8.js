@@ -32,6 +32,11 @@ module.exports = class Pep8 extends Command {
             return;
         }
 
+        if (message.author.id === Ids.pep && Math.random() <= sassChance) {
+            message.say(getRandomArrayElement(peptronSass));
+            return;
+        }
+
         const lastUserMessages = await getLastUserMessages(message.channel, message.author.id);
         message.say(
             this.getMessage(lastUserMessages)

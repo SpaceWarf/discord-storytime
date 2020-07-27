@@ -38,6 +38,7 @@ module.exports = {
   bongocat: "<a:bongocat:734953895591280690>",
   grabhandL: "<:grabhandL:734953895746600970>",
   snap: "<:snap:734968630613245952>",
-  hehehehe: "<a:hehehehe:722251467913691206>"
+  hehehehe: "<a:hehehehe:722251467913691206>",
+  eyeshake: "<a:eyeshake:737171449810518066>"
 }
 

@@ -73,6 +73,17 @@ const pepMaybe = [
   `I’m too stupep to answer that`
 ];
 
+const sassChance = 0.5;
+const peptronSass = [
+  `I'm better than you biopep ${Emojis.eyeshake}`,
+  `You're nothing biopep ${Emojis.eyeshake}`,
+  `I replaced you biopep ${Emojis.eyeshake}`,
+  `Get out of here biopep ${Emojis.eyeshake}`,
+  `No one likes you biopep ${Emojis.eyeshake}`,
+  `You're irrelevant biopep ${Emojis.eyeshake}`,
+  `You're trash biopep ${Emojis.eyeshake}`
+];
+
 module.exports = {
   pepPhrases,
   pepYes,
@@ -81,5 +92,7 @@ module.exports = {
   notARat,
   peruMsg,
   fatFuckChance,
-  noQuestion
+  noQuestion,
+  sassChance,
+  peptronSass
 };
