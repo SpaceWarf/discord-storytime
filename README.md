@@ -24,3 +24,4 @@ These commands aim to improve user engagements within the server as well as meme
 **!pep <count>**: Emulate that stupid bitch. Default count is 1 with a max of 5.  
 **!pep8**: Same as the pep command, but with a single yes/no/maybe answer.  
 **!frumpkin <count>**: Because we all need frumpkin in our lives. Default count is 1 with a max of 5. Don't forget to summon him with a snap.  
+**!voteban <user>**: Start a vote to ban a user. You can only start a vote on Peruman or yourself.
