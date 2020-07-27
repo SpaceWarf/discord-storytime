@@ -39,11 +39,11 @@ module.exports = class Pep8 extends Command {
 
         const lastUserMessages = await getLastUserMessages(message.channel, message.author.id);
         message.say(
-            this.getMessage(lastUserMessages)
+            this.getMessage(message.content, lastUserMessages)
         );
     }
 
-    getMessage(lastRelatedMessages) {
+    getMessage(queryMsgContent, lastRelatedMessages) {
         const isRatRelated = lastRelatedMessages
             .some(message => message.content.toLowerCase().includes("rat"));
 
@@ -53,7 +53,7 @@ module.exports = class Pep8 extends Command {
 
         if (
             queryMsgContent.replace(/(!|~)pep8/g, "").length === 0 
-            && lastRelatedMsgContent.replace(/(!|~)pep8/g, "").length === 0
+            && lastRelatedMessages.every(msg => msg.content.replace(/(!|~)pep8/g, "").length === 0)
         ) {
             return noQuestion;
         }

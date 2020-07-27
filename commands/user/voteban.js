@@ -28,7 +28,7 @@ module.exports = class Voteban extends Command {
             return [checkmark, xmark].includes(reaction.emoji.name);
         };
 
-        if (user && user.id === Ids.peru || user.id === message.author.id) {
+        if (user && (user.id === Ids.peru || user.id === message.author.id)) {
             if (this.activeVote) {
                 message.channel.send("There's already an active vote! Go vote!");
                 return;
