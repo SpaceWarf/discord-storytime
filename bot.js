@@ -8,7 +8,7 @@ const CustomEmbed = require('./twitch/custom-embed');
 const { Ids, Roles } = require("./config/users.config");
 const Emojis = require("./config/emojis.config");
 
-const prefix = '~';
+const prefix = '!';
 
 const client = new commando.Client({
     commandPrefix: prefix,
