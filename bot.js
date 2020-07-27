@@ -32,6 +32,7 @@ client.on('ready', () => {
 client.on('guildMemberAdd', member => {
     if (member.id === Ids.peru) {
         member.setRoles([Roles.punchingBag]);
+        member.setUsername("Peruman-faced stink bug");
     }
 });
 
