@@ -6,6 +6,7 @@ const StreamActivity = require('./twitch/stream-activity');
 const { alertChannel } = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
 const { Ids, Roles } = require("./config/users.config");
+const Emojis = require("./config/emojis.config");
 
 const prefix = '~';
 
@@ -31,6 +32,24 @@ client.on('ready', () => {
 client.on('guildMemberAdd', member => {
     if (member.id === Ids.peru) {
         member.setRoles([Roles.punchingBag]);
+    }
+});
+
+client.on('message', message => {
+    if (message.author.id === Ids.peru) {
+        const emojis = Object.values(Emojis).reduce((arr, emoji) => {
+            const id = emoji.match(/:\d*>/g)[0];
+            arr.push({
+                name: emoji.match(/:.*:/g)[0],
+                id: id.slice(1, id.length - 1)
+            });
+            return arr;
+        }, []);
+
+        const matchedEmoji = emojis.find(emoji => message.content.includes(emoji.name));
+        if (matchedEmoji) {
+            message.react(matchedEmoji.id);
+        }
     }
 });
 

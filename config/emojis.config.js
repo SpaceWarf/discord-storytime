@@ -37,6 +37,7 @@ module.exports = {
   kittyplay: "<a:kittyplay:734953896413495326>",
   bongocat: "<a:bongocat:734953895591280690>",
   grabhandL: "<:grabhandL:734953895746600970>",
-  snap: "<:snap:734968630613245952>"
+  snap: "<:snap:734968630613245952>",
+  hehehehe: "<a:hehehehe:722251467913691206>"
 }
 
