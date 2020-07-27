@@ -5,7 +5,7 @@ const TwitchMonitor = require('./twitch/twitch-monitor');
 const StreamActivity = require('./twitch/stream-activity');
 const { alertChannel } = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
-const { Ids } = require("./config/users.config");
+const { Ids, Roles } = require("./config/users.config");
 
 const prefix = '~';
 
@@ -26,6 +26,12 @@ client.on('ready', () => {
     console.log('[Bot] Connected as ' + client.user.tag);
     StreamActivity.init();
     TwitchMonitor.start();
+});
+
+client.on('guildMemberAdd', member => {
+    if (member.id === Ids.peru) {
+        member.setRoles([Roles.punchingBag]);
+    }
 });
 
 /**
