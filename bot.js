@@ -37,7 +37,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
-    if (message.author.id === Ids.peru) {
+    if ([Ids.peru, Ids.phantom].includes(message.author.id)) {
         const emojis = Object.values(Emojis).reduce((arr, emoji) => {
             const id = emoji.match(/:\d*>/g)[0];
             arr.push({
