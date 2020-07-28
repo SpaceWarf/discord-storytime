@@ -15,7 +15,7 @@ module.exports = class Voteban extends Command {
             description: "Fuck you peru.",
             throttling: {
                 usages: 1,
-                duration: 60
+                duration: 60*5
             }
         });
         this.activeVote = false;
@@ -34,8 +34,8 @@ module.exports = class Voteban extends Command {
                 return;
             }
             this.activeVote = true;
-            await message.react(checkmark);
-            await message.react(xmark);
+            message.react(checkmark);
+            message.react(xmark);
 
             const collector = message.createReactionCollector(filter, { time: 30000 });
 
