@@ -32,7 +32,7 @@ class TwitchApi {
         }
     }
 
-    static fetchStreams(channelNames) {
+    static fetchStreams(channelNames = []) {
         return new Promise((resolve, reject) => {
             axios.get(`/streams?user_login=${channelNames.join('&user_login=')}`, this.requestOptions)
                 .then((res) => {
@@ -64,7 +64,7 @@ class TwitchApi {
      * 'FPS' applied by the game 'Call of Duty' will not be returned. But the
      * language tags and the manually added tags will be.
      */
-    static fetchTagsInfo(tagIds) {
+    static fetchTagsInfo(tagIds = []) {
         return new Promise((resolve, reject) => {
             axios.get(`/tags/streams?tag_id=${tagIds.join("&tag_id=")}`, this.requestOptions)
                 .then((res) => {
