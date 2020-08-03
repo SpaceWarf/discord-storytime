@@ -91,7 +91,21 @@ const koolaid = [
     `⠀         ${Emojis.kcfCreep}${Emojis.wall}`,
     `⠀         :boom:${Emojis.kcfCreep}`,
     `⠀               ${Emojis.kcfCreep} "OH YEAH!"`
-]
+];
+
+const wack = [
+    `${Emojis.spike}                              ${Emojis.angrytom}`,
+    `${Emojis.spike}                            ${Emojis.angrytom}`,
+    `${Emojis.spike}                          ${Emojis.angrytom}`,
+    `${Emojis.spike}                        ${Emojis.angrytom}`,
+    `${Emojis.spike}                      ${Emojis.angrytom}`,
+    `${Emojis.spike}                    ${Emojis.angrytom}`,
+    `${Emojis.spike}                  ${Emojis.angrytom}`,
+    `${Emojis.spike}    ${Emojis.log}${Emojis.angrytom}`,
+    `${Emojis.spike}    ${Emojis.baseballbat}${Emojis.angrytom}`,
+    `${Emojis.spike}:boom:${Emojis.baseballbat}${Emojis.angrytom}`,
+    `${Emojis.dogdance} ${Emojis.baseballbat}${Emojis.angrytom}`,
+];
 
 module.exports = {
     "batter-up": {
@@ -117,5 +131,9 @@ module.exports = {
     "koolaid": {
         frames: koolaid,
         description: "OH YEAH!"
+    },
+    "wack": {
+        frames: wack,
+        description: "Oh Davi, não vai não"
     }
 };

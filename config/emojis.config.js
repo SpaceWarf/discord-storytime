@@ -39,6 +39,11 @@ module.exports = {
   grabhandL: "<:grabhandL:734953895746600970>",
   snap: "<:snap:734968630613245952>",
   hehehehe: "<a:hehehehe:722251467913691206>",
-  eyeshake: "<a:eyeshake:737171449810518066>"
+  eyeshake: "<a:eyeshake:737171449810518066>",
+  dogdance: "<a:dogdance:739829335078207571>",
+  spike: "<:spike:739833310297194508>",
+  log: "<:log:739834382285537394>",
+  baseballbat: "<:baseballbat:739832693352693840>",
+  angrytom: "<:angrytom:739832263461699585>"
 }
 
