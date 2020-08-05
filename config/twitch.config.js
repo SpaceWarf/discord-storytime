@@ -16,7 +16,7 @@ const pollingInterval = 60000;
 const roleAssignmentChannel = "192608929715453953";
 // const roleAssignmentChannel = "724377858578841614";
 
-const roleAssignmentMessage = "";
+const roleAssignmentMessage = "740719958991962172";
 // const roleAssignmentMessage = "740718663795081277";
 
 const alertChannel = "721419766799007835";
