@@ -2,9 +2,7 @@ const { Command } = require("discord.js-commando");
 const { Ids } = require("../../config/users.config");
 const { kickPhrases, stayPhrases } = require("../../config/peru.config");
 const { getRandomArrayElement } = require("../../utilities/array");
-
-const checkmark = "✅";
-const xmark = "❌";
+const Emojis = require("../../config/emojis.config");
 
 module.exports = class Voteban extends Command {
     constructor(client) {
@@ -25,7 +23,7 @@ module.exports = class Voteban extends Command {
         const user = message.mentions.members.first();
 
         const filter = reaction => {
-            return [checkmark, xmark].includes(reaction.emoji.name);
+            return [Emojis.checkmark, Emojis.xmark].includes(reaction.emoji.name);
         };
 
         if (user && (user.id === Ids.peru || user.id === message.author.id || message.author.id === Ids.space)) {
@@ -34,18 +32,18 @@ module.exports = class Voteban extends Command {
                 return;
             }
             this.activeVote = true;
-            message.react(checkmark);
-            message.react(xmark);
+            message.react(Emojis.checkmark);
+            message.react(Emojis.xmark);
 
             const collector = message.createReactionCollector(filter, { time: 30000 });
 
             collector.on("end", async reactions => {
                 this.activeVote = false;
-                const yesVotes = this.getReactioncount(reactions, checkmark);
-                const noVotes = this.getReactioncount(reactions, xmark);
+                const yesVotes = this.getReactioncount(reactions, Emojis.checkmark);
+                const noVotes = this.getReactioncount(reactions, Emojis.xmark);
 
                 message.channel
-                    .send(`The vote has ended, here are the results:\n  ${checkmark} - ${yesVotes}\n  ${xmark} - ${noVotes}`)
+                    .send(`The vote has ended, here are the results:\n  ${Emojis.checkmark} - ${yesVotes}\n  ${Emojis.xmark} - ${noVotes}`)
 
                 if (yesVotes > noVotes) {
                     this.kick(user, message.channel);

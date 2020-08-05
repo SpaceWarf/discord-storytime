@@ -45,6 +45,8 @@ module.exports = {
   log: "<:log:739834382285537394>",
   baseballbat: "<:baseballbat:739832693352693840>",
   angrytom: "<:angrytom:739832263461699585>",
-  dancingbaby: "<a:dancingbaby:740683839009194004>"
+  dancingbaby: "<a:dancingbaby:740683839009194004>",
+  checkmark: "✅",
+  xmark: "❌"
 }
 

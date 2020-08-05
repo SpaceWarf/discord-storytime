@@ -3,7 +3,12 @@ const path = require('path');
 const commando = require('discord.js-commando');
 const TwitchMonitor = require('./twitch/twitch-monitor');
 const StreamActivity = require('./twitch/stream-activity');
-const { alertChannel } = require('./config/twitch.config');
+const {
+    alertChannel,
+    roleToPing,
+    roleAssignmentChannel,
+    roleAssignmentMessage
+} = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
 const { Ids, Roles } = require("./config/users.config");
 const Emojis = require("./config/emojis.config");
@@ -27,12 +32,21 @@ client.on('ready', () => {
     console.log('[Bot] Connected as ' + client.user.tag);
     StreamActivity.init();
     TwitchMonitor.start();
+
+    const roleChannel = client.channels.get(roleAssignmentChannel);
+    roleChannel.fetchMessage(roleAssignmentMessage)
+        .catch(async () => {
+            const roleMsg = await roleChannel.send(`React to this message with ${Emojis.checkmark} to be assigned the <@&${roleToPing}> role and be notified when channels go online.\nTo stop being notified, react instead with ${Emojis.xmark} and the role will be removed.`);
+            roleMsg.react(Emojis.checkmark);
+            roleMsg.react(Emojis.xmark);
+        });
 });
 
 client.on('guildMemberAdd', member => {
     if (member.id === Ids.peru) {
         member.setRoles([Roles.punchingBag]);
         member.setNickname("Peruman-faced stink bug");
+        console.log(`[Bot] Set role and nickname of Peruman`);
     }
 });
 
@@ -50,8 +64,32 @@ client.on('message', message => {
         const matchedEmoji = emojis.find(emoji => message.content.includes(emoji.name));
         if (matchedEmoji) {
             message.react(matchedEmoji.id);
+            console.log(`[Bot] Reacted to a message with emoji ${matchedEmoji.id}`);
         }
     }
+});
+
+client.on('messageReactionAdd', (reaction, user) => {
+    if (
+        reaction.message.id !== roleAssignmentMessage
+        || client.user.id === user.id
+    ) { return; }
+
+    if (reaction.emoji.name == Emojis.checkmark) {
+        reaction.message.guild.fetchMember(user.id).then(member => {
+            member.addRole(roleToPing);
+            console.log(`[Bot] Given ping role to ${user.username}`);
+        });
+    }
+
+    if (reaction.emoji.name == Emojis.xmark) {
+        reaction.message.guild.fetchMember(user.id).then(member => {
+            member.removeRole(roleToPing);
+            console.log(`[Bot] Removed ping role from ${user.username}`);
+        });
+    }
+
+    reaction.remove(user);
 });
 
 /**
@@ -67,6 +105,7 @@ TwitchMonitor.onChannelLiveUpdate((streamData, isOnline) => {
                 channel.send(message.content, {
                     embed: message.embed
                 });
+                console.log(`[Bot] Sent live notification for ${streamData.user_name}`);
             });
     }
 });
