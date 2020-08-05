@@ -61,7 +61,7 @@ client.on('message', message => {
 TwitchMonitor.onChannelLiveUpdate((streamData, isOnline) => {
     if (isOnline && !StreamActivity.isChannelOnline(streamData)) {
         StreamActivity.setChannelOnline(streamData);
-        const channel = client.channels.find('name', alertChannel);
+        const channel = client.channels.get(alertChannel);
         CustomEmbed.getCustomAlertMessage(streamData)
             .then(message => {
                 channel.send(message.content, {

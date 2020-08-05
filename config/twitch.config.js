@@ -13,8 +13,11 @@ const usernames = [
 
 const pollingInterval = 60000;
 
-const alertChannel = "bot-channel-🤖";
-// const alertChannel = "the-lab";
+const alertChannel = "721419766799007835";
+// const alertChannel = "724377858578841614";
+
+const roleToPing = "<@&740629609162342400>"
+// const roleToPing = "<@&737158451293061181>";
 
 /**
  * Color code reference can be found here:
@@ -46,11 +49,11 @@ const colors = {
     DARK_VIVID_PINK: 12320855
 };
 
-const defaultMessage = "@everyone %u% just went live! http://www.twitch.tv/%u%";
+const defaultMessage = `${roleToPing} %u% just went live! http://www.twitch.tv/%u%`;
 
 const customAlerts = {
     "space_warf": {
-        message: "@everyone The rat bastard himself just went live! :rat: http://www.twitch.tv/%u%",
+        message: `${roleToPing} The rat bastard himself just went live! :rat: http://www.twitch.tv/%u%`,
         color: colors.RED
     },
     "seajunior": {
