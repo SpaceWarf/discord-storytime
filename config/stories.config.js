@@ -107,14 +107,54 @@ const wack = [
     `${Emojis.dogdance} ${Emojis.baseballbat}${Emojis.angrytom}`,
 ];
 
+const hooked = [
+    `⠀OUGA CHAKA OUGA OUGA  ${Emojis.dancingbaby}`,
+    `⠀OUGA CHAKA OUGA OUGA  ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby}  OUGA CHAKA OUGA OUGA`,
+    `⠀                                                         ${Emojis.dancingbaby}  OUGA CHAKA OUGA OUGA`,
+    `⠀OUGA CHAKA OUGA OUGA  ${Emojis.dancingbaby} `,
+    `⠀OUGA CHAKA OUGA OUGA  ${Emojis.dancingbaby} `,
+    `⠀                                                         ${Emojis.dancingbaby}  OUGA CHAKA OUGA OUGA`,
+    `⠀                                                         ${Emojis.dancingbaby}  OUGA CHAKA OUGA OUGA`,
+    `⠀OUGA CHAKA OUGA OUGA  ${Emojis.dancingbaby}`,
+    `⠀OUGA CHAKA OUGA OUGA  ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby}  I CAN'T STOP THIS FEELING`,
+    `⠀                                                         ${Emojis.dancingbaby}  I CAN'T STOP THIS FEELING`,
+    `⠀             DEEP INSIIIIDE OF ME  ${Emojis.dancingbaby}`,
+    `⠀             DEEP INSIIIIDE OF ME  ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby}  GIRL YOU JUST DON'T REALIZE`,
+    `⠀                                                         ${Emojis.dancingbaby}  GIRL YOU JUST DON'T REALIZE`,
+    `⠀   WHAT YOU DO TO MEEEE  ${Emojis.dancingbaby}`,
+    `⠀   WHAT YOU DO TO MEEEE  ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby}  WHEN YOU HOLD ME`,
+    `⠀                                                         ${Emojis.dancingbaby}  WHEN YOU HOLD ME`,
+    `⠀      IN YOUR ARMS SO TIGHT ${Emojis.dancingbaby}`,
+    `⠀      IN YOUR ARMS SO TIGHT ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby}  YOU LET ME KNOW`,
+    `⠀                                                         ${Emojis.dancingbaby}  YOU LET ME KNOW`,
+    `⠀        EVERYTHING'S ALRIGHT  ${Emojis.dancingbaby}`,
+    `⠀        EVERYTHING'S ALRIGHT  ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby}  iiiiiiIIIIIIiiiiii'm`,
+    `⠀                                                         ${Emojis.dancingbaby}  iiiiiiIIIIIIiiiiii'm`,
+    `⠀   HOOKED ON A FEELING :trumpet: ${Emojis.dancingbaby}`,
+    `⠀   HOOKED ON A FEELING :trumpet: ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby} :trumpet: I'M HIGH ON BELIEVING`,
+    `⠀                                                         ${Emojis.dancingbaby} :trumpet: I'M HIGH ON BELIEVING`,
+    `⠀     THAT YOU'RE IN LOVE :trumpet: ${Emojis.dancingbaby}`,
+    `⠀     THAT YOU'RE IN LOVE :trumpet: ${Emojis.dancingbaby}`,
+    `⠀                                                         ${Emojis.dancingbaby} WITH MEEEEEE :trumpet:`,
+    `⠀                                                         ${Emojis.dancingbaby} WITH MEEEEEE :trumpet:`,
+    `⠀                                                         ${Emojis.dancingbaby}`
+];
+
 module.exports = {
     "batter-up": {
         frames: batterUp,
-        description: "Rat vs Mouse - A timeless tale of revenge."
+        description: "Rat vs Mouse - A timeless tale of revenge"
     },
     "bonk": {
         frames: bonk,
-        description: "STFU Peru."
+        description: "STFU Peru"
     },
     "donut-time": {
         frames: donutTime,
@@ -122,11 +162,11 @@ module.exports = {
     },
     "menace": {
         frames: menace,
-        description: "Menacing."
+        description: "Menacing"
     },
     "adhd": {
         frames: adhd,
-        description: "All truths are not good to tell."
+        description: "All truths are not good to tell"
     },
     "koolaid": {
         frames: koolaid,
@@ -135,5 +175,9 @@ module.exports = {
     "wack": {
         frames: wack,
         description: "Oh Davi, não vai não"
+    },
+    "hooked": {
+        frames: hooked,
+        description: "When you're hooked on a feeling and need to dance it off"
     }
 };
