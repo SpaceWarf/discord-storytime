@@ -51,13 +51,17 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
-    if ([Ids.peru, Ids.phantom].includes(message.author.id)) {
+    if ([Ids.peru].includes(message.author.id)) {
         const emojis = Object.values(Emojis).reduce((arr, emoji) => {
-            const id = emoji.match(/:\d*>/g)[0];
-            arr.push({
-                name: emoji.match(/:.*:/g)[0],
-                id: id.slice(1, id.length - 1)
-            });
+            const id = emoji.match(/:\d*>/g);
+
+            if (id) {
+                arr.push({
+                    name: emoji.match(/:.*:/g)[0],
+                    id: id[0].slice(1, id[0].length - 1)
+                });
+            }
+
             return arr;
         }, []);
 
