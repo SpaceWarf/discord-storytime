@@ -13,17 +13,17 @@ const usernames = [
 
 const pollingInterval = 60000;
 
-// const roleAssignmentChannel = "192608929715453953";
-const roleAssignmentChannel = "724377858578841614";
+const roleAssignmentChannel = "192608929715453953";
+// const roleAssignmentChannel = "724377858578841614";
 
-// const roleAssignmentMessage = "740719958991962172";
-const roleAssignmentMessage = "740718663795081277";
+const roleAssignmentMessage = "740719958991962172";
+// const roleAssignmentMessage = "740718663795081277";
 
-// const alertChannel = "721419766799007835";
-const alertChannel = "724377858578841614";
+const alertChannel = "721419766799007835";
+// const alertChannel = "724377858578841614";
 
-// const roleToPing = "740629609162342400"
-const roleToPing = "737158451293061181";
+const roleToPing = "740629609162342400"
+// const roleToPing = "737158451293061181";
 
 /**
  * Color code reference can be found here:

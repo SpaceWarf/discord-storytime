@@ -18,7 +18,8 @@ const prefix = '!';
 const client = new commando.Client({
     commandPrefix: prefix,
     owner: [Ids.space],
-    unknownCommandResponse: false
+    unknownCommandResponse: false,
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 
 client.registry
