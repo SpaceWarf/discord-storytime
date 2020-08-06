@@ -28,7 +28,7 @@ client.registry
     ])
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('[Bot] Connected as ' + client.user.tag);
     StreamActivity.init();
     TwitchMonitor.start();
@@ -40,6 +40,9 @@ client.on('ready', () => {
             roleMsg.react(Emojis.checkmark);
             roleMsg.react(Emojis.xmark);
         });
+
+    const me = await client.fetchUser(Ids.space);
+    me.send("[Bot] Bot successfully started.");
 });
 
 client.on('guildMemberAdd', member => {
@@ -65,10 +68,12 @@ client.on('message', message => {
             return arr;
         }, []);
 
-        const matchedEmoji = emojis.find(emoji => message.content.includes(emoji.name));
-        if (matchedEmoji) {
-            message.react(matchedEmoji.id);
-            console.log(`[Bot] Reacted to a message with emoji ${matchedEmoji.id}`);
+        const matchedEmojis = emojis.filter(emoji => message.content.includes(emoji.name));
+        if (matchedEmojis) {
+            matchedEmojis.forEach(emoji => {
+                message.react(emoji.id);
+                console.log(`[Bot] Reacted to a message with emoji ${emoji.id}`);
+            });
         }
     }
 });
