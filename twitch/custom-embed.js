@@ -14,7 +14,7 @@ class CustomEmbed {
         streamThumbnailUrl = streamThumbnailUrl.replace("{height}", "720");
 
         const gameInfo = await TwitchApi.fetchGameInfo(streamData.game_id);
-        const tagsInfo = await TwitchApi.fetchTagsInfo(streamData.tag_ids);
+        const tagsInfo = await TwitchApi.fetchTagsInfo(streamData.tag_ids ? streamData.tag_ids : []);
         const channelInfo = await TwitchApi.fetchUserInfo(streamData.user_id);
         return {
             "content": customMessage,
