@@ -17,7 +17,7 @@ class TwitchMonitor {
     }
 
     static refresh() {
-        console.warn('[TwitchMonitor]', 'Polling channels.');
+        // console.warn('[TwitchMonitor]', 'Polling channels.');
         // Check buffer: are we waiting?
         if (this.eventBufferStartTime) {
             let now = Date.now();
