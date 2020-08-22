@@ -1,17 +1,6 @@
-const usernames = [
-    "kittycatfriends",
-    "space_warf",
-    "ravxnoak",
-    "seajunior",
-    "hahaitscel",
-    "digitalcafe",
-    "megimedia",
-    "peruman95",
-    "ossymoon",
-    "phant0mpup"
-];
-
 const pollingInterval = 60000;
+const pingInterval = 3600000;
+const offlineInterval = 1800000;
 
 const roleAssignmentChannel = "192608929715453953";
 // const roleAssignmentChannel = "724377858578841614";
@@ -77,8 +66,9 @@ const customAlerts = {
 };
 
 module.exports = {
-    usernames,
     pollingInterval,
+    pingInterval,
+    offlineInterval,
     alertChannel,
     customAlerts,
     roleToPing,

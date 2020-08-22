@@ -1,5 +1,5 @@
 const { Command } = require("discord.js-commando");
-const { usernames } = require('../../config/twitch.config');
+const StreamActivity = require('../../twitch/stream-activity');
 
 module.exports = class Streams extends Command {
     constructor(client) {
@@ -12,6 +12,7 @@ module.exports = class Streams extends Command {
     }
 
     async run(message) {
+        const usernames = await StreamActivity.getAllChannels();
         const messageString = usernames
             .reduce((str, username) => {
                 return `${str}\n<http://www.twitch.tv/${username}>`;

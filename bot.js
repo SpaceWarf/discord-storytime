@@ -7,7 +7,9 @@ const {
     alertChannel,
     roleToPing,
     roleAssignmentChannel,
-    roleAssignmentMessage
+    roleAssignmentMessage,
+    pingInterval,
+    offlineInterval
 } = require('./config/twitch.config');
 const CustomEmbed = require('./twitch/custom-embed');
 const { Ids, Roles } = require("./config/users.config");
@@ -31,7 +33,6 @@ client.registry
 
 client.on('ready', async () => {
     console.log('[Bot] Connected as ' + client.user.tag);
-    StreamActivity.init();
     TwitchMonitor.start();
 
     const roleChannel = client.channels.get(roleAssignmentChannel);
@@ -106,22 +107,40 @@ client.on('messageReactionAdd', (reaction, user) => {
  * Twitch integration based on the Timbot from github:
  * https://github.com/roydejong/timbot/tree/fd16e7fe706ea8e9b19e3fbff29aa45f463a0585
  */
-TwitchMonitor.onChannelLiveUpdate((streamData, isOnline) => {
-    if (isOnline && !StreamActivity.isChannelOnline(streamData)) {
+TwitchMonitor.onChannelLiveUpdate(async (streamData, isOnline) => {
+    const isChannelCurrentlyLive = await StreamActivity.isChannelOnline(streamData);
+
+    if (isOnline && !isChannelCurrentlyLive) {
         StreamActivity.setChannelOnline(streamData);
-        const channel = client.channels.get(alertChannel);
-        CustomEmbed.getCustomAlertMessage(streamData)
-            .then(message => {
-                channel.send(message.content, {
-                    embed: message.embed
+
+        if (await isReadyForPing(streamData)) {
+            const channel = client.channels.get(alertChannel);
+            CustomEmbed.getCustomAlertMessage(streamData)
+                .then(message => {
+                    channel.send(message.content, {
+                        embed: message.embed
+                    });
+                    StreamActivity.setChannelLastPingTimestamp(streamData);
+                    console.log(`[Bot] Sent live notification for ${streamData.user_name}`);
                 });
-                console.log(`[Bot] Sent live notification for ${streamData.user_name}`);
-            });
+        }
     }
 });
 
+const isReadyForPing = async streamData => {
+    const lastPingTimestamp = await StreamActivity.getChannelLastPingTimestamp(streamData);
+    const lastOfflineTimestamp = await StreamActivity.getChannelLastOfflineTimestamp(streamData);
+
+    const now = new Date().getTime();
+    const enoughTimeBetweenPings = !lastPingTimestamp || now -lastPingTimestamp.getTime() > pingInterval;
+    const enoughTimeOffline = !lastOfflineTimestamp || now - lastOfflineTimestamp.getTime() > offlineInterval;
+
+    return enoughTimeBetweenPings && enoughTimeOffline;
+};
+
 TwitchMonitor.onChannelOffline((streamData) => {
     StreamActivity.setChannelOffline(streamData);
+    StreamActivity.setChannelLastOfflineTimestamp(streamData);
 });
 
 client.login(process.env.TOKEN);

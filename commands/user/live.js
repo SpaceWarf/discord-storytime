@@ -12,15 +12,14 @@ module.exports = class Live extends Command {
     }
 
     async run(message) {
-        const live = StreamActivity.getOnlineChannels();
-        const messageString = Object.values(live)
-            .reduce((str, stream) => {
-                return `${str}\nhttp://www.twitch.tv/${stream.user_name} - ${stream.title}`;
-            }, "");
-
-        if (messageString === "") {
+        const channelStates = await StreamActivity.getOnlineChannels();
+        if (channelStates.length === 0) {
             message.say("Unfortunately no one is currently live! 😭");
-        } else {
+        } else {        
+            const messageString = channelStates
+                .reduce((str, channelState) => {
+                    return `${str}\nhttp://www.twitch.tv/${channelState.username} - ${channelState.streamData.title}`;
+                }, "");
             message.say(messageString);
         }
     }

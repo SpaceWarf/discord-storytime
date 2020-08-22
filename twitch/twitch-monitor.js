@@ -1,23 +1,23 @@
-const { usernames, pollingInterval } = require('../config/twitch.config.js');
+const { pollingInterval } = require('../config/twitch.config.js');
 const TwitchApi = require('./twitch-api');
+const db = require("../db/db");
 
 class TwitchMonitor {
-    static start() {
+    static async start() {
+        const usernames = await db.getAllChannels();
+
         setInterval(() => {
-            this.refresh();
+            this.refresh(usernames);
         }, pollingInterval);
 
-        // Immediate refresh after startup (allow voice etc to settle)
         setTimeout(() => {
-            this.refresh();
+            this.refresh(usernames);
         }, 1000);
 
-        // Ready!
         console.log('[TwitchMonitor]', `Configured stream status polling for channels:`, usernames, `(${pollingInterval}ms interval)`);
     }
 
-    static refresh() {
-        // console.warn('[TwitchMonitor]', 'Polling channels.');
+    static refresh(usernames) {
         // Check buffer: are we waiting?
         if (this.eventBufferStartTime) {
             let now = Date.now();

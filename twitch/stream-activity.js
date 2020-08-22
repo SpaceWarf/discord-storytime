@@ -1,36 +1,44 @@
+const db = require("../db/db");
+
 class StreamActivity {
-    static init() {
-        this.onlineChannels = {};
+    static async getAllChannels() {
+        return await db.getAllChannels();
     }
 
-    /**
-     * Registers a channel that has come online, and updates the user activity.
-     */
     static setChannelOnline(stream) {
-        console.log('[StreamActivity] Setting channel online: ', stream.user_name);
-        this.onlineChannels[stream.user_name] = stream;
+        console.log('[StreamActivity] Setting channel online:', stream.user_name);
+        db.setChannelState(stream.user_name.toLowerCase(), true, stream);
     }
 
-    /**
-     * Marks a channel has having gone offline, and updates the user activity if needed.
-     */
+    static setChannelLastPingTimestamp(stream) {
+        console.log('[StreamActivity] Setting channel last ping:', stream.user_name);
+        db.setChannelLastPingTimestamp(stream.user_name.toLowerCase());
+    }
+
+    static getChannelLastPingTimestamp(stream) {
+        return db.getChannelLastPingTimestamp(stream.user_name.toLowerCase());
+    }
+
     static setChannelOffline(stream) {
-        console.log('[StreamActivity] Setting channel offline: ', stream.user_name);
-        delete this.onlineChannels[stream.user_name];
+        console.log('[StreamActivity] Setting channel offline:', stream.user_name);
+        db.setChannelState(stream.user_name.toLowerCase(), false, {});
     }
 
-    /**
-     * Fetches the channels that are currently online.
-     */
+    static setChannelLastOfflineTimestamp(stream) {
+        console.log('[StreamActivity] Setting channel last offline:', stream.user_name);
+        db.setChannelLastOfflineTimestamp(stream.user_name.toLowerCase());
+    }
+
+    static getChannelLastOfflineTimestamp(stream) {
+        return db.getChannelLastOfflineTimestamp(stream.user_name.toLowerCase());
+    }
+
     static getOnlineChannels() {
-        return this.onlineChannels;
+        return db.getChannelsByState(true);
     }
 
-    /**
-     * Checks if a channel is currently online.
-     */
     static isChannelOnline(stream) {
-        return !!this.onlineChannels[stream.user_name];
+        return db.isChannelOnline(stream.user_name.toLowerCase());
     }
 }
 
