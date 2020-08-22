@@ -7,6 +7,8 @@ class Database {
     }
 
     _connect() {
+        mongoose.set('useNewUrlParser', true);
+        mongoose.set('useUnifiedTopology', true);
         mongoose.connect(
             `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_SERVER}/${process.env.MONGO_DB}`
         )
