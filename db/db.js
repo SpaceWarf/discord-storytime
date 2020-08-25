@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const ChannelStateModel = require('./models/channel-state');
+const DiscordConfigModel = require('./models/discord-config');
+const CustomTwitchAlertModel = require('./models/custom-twitch-alerts');
+const UserModel = require('./models/user');
+const RoleModel = require('./models/role');
 
 class Database {
     constructor() {
@@ -10,7 +14,7 @@ class Database {
         mongoose.set('useNewUrlParser', true);
         mongoose.set('useUnifiedTopology', true);
         mongoose.connect(
-            `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_SERVER}/${process.env.MONGO_DB}`
+            `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_SERVER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
         )
             .then(() => {
                 console.log('[DB] Database connection successful');
@@ -18,6 +22,44 @@ class Database {
             .catch(err => {
                 console.error('[DB] Database connection error', err);
             });
+    }
+
+    async getDiscordConfig() {
+        return await DiscordConfigModel.findOne({ current: true });
+    }
+
+    updateRoleAssignmentMessageConfig(id) {
+        console.log(`[DB] Setting role assignment message id of current config to ${id}`);
+        DiscordConfigModel.updateOne(
+            { current: true },
+            { roleAssignmentMessage: id }
+        ).exec();
+    }
+
+    async getCustomTwitchAlerts() {
+        return await CustomTwitchAlertModel.find({});
+    }
+
+    async getDiscordUsersMap() {
+        const users = await UserModel.find({});
+        const usersMap = new Map();
+
+        users.forEach(user => {
+            usersMap[user.username] = user.id;
+        });
+
+        return usersMap;
+    }
+
+    async getDiscordRolesMap() {
+        const roles = await RoleModel.find({});
+        const rolesMap = new Map();
+
+        roles.forEach(role => {
+            rolesMap[role.name] = role.id;
+        });
+
+        return rolesMap;
     }
 
     async getAllChannels() {

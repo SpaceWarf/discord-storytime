@@ -1,4 +1,3 @@
-const { pollingInterval } = require('../config/twitch.config.js');
 const TwitchApi = require('./twitch-api');
 const db = require("../db/db");
 
@@ -8,13 +7,13 @@ class TwitchMonitor {
 
         setInterval(() => {
             this.refresh(usernames);
-        }, pollingInterval);
+        }, 60000);
 
         setTimeout(() => {
             this.refresh(usernames);
         }, 1000);
 
-        console.log('[TwitchMonitor]', `Configured stream status polling for channels:`, usernames, `(${pollingInterval}ms interval)`);
+        console.log('[TwitchMonitor]', `Configured stream status polling for channels:`, usernames, `(60000ms interval)`);
     }
 
     static refresh(usernames) {

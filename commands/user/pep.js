@@ -7,7 +7,6 @@ const {
     sassChance,
     peptronSass
 } = require("../../config/pep.config");
-const { Ids } = require("../../config/users.config");
 const { getRandomArrayElement } = require("../../utilities/array");
 const { getLastUserMessages } = require("../../utilities/messages");
 
@@ -26,12 +25,12 @@ module.exports = class Pep extends Command {
     }
 
     async run(message) {
-        if (message.author.id === Ids.peru && Math.random() <= fatFuckChance) {
+        if (message.author.id === this.client.users.peru && Math.random() <= fatFuckChance) {
             message.say(peruMsg);
             return;
         }
 
-        if (message.author.id === Ids.pep && Math.random() <= sassChance) {
+        if (message.author.id === this.client.users.pep && Math.random() <= sassChance) {
             message.say(getRandomArrayElement(peptronSass));
             return;
         }

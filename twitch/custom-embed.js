@@ -1,13 +1,9 @@
 const TwitchApi = require('./twitch-api');
-const { customAlerts } = require('../config/twitch.config');
 
 class CustomEmbed {
-    static async getCustomAlertMessage(streamData) {
-        const customAlertData = customAlerts[streamData.user_name.toLowerCase()] || customAlerts.default;
-
-        let customMessage = customAlertData.message;
-        customMessage = customMessage.replace(/%u%/g, streamData.user_name);
-        customMessage = customMessage.replace(/%t%/g, streamData.title);
+    static async getCustomAlertMessage(customTwitchAlerts, streamData, roleToPing) {
+        const customAlertData = this.getAlertMessageForUsername(customTwitchAlerts, streamData.user_name.toLowerCase());
+        let customMessage = this.populateAlertVariables(customAlertData.message, streamData, roleToPing)
 
         let streamThumbnailUrl = streamData.thumbnail_url;
         streamThumbnailUrl = streamThumbnailUrl.replace("{width}", "1280");
@@ -38,6 +34,23 @@ class CustomEmbed {
                 "fields": this.getFormattedFields(gameInfo, tagsInfo)
             }
         };
+    }
+
+    static getAlertMessageForUsername(alertMessages, username) {
+        const messageForUsername = alertMessages.find(alert => alert.username === username);
+
+        return messageForUsername
+            ? messageForUsername
+            : alertMessages.find(alert => alert.username === "default");
+    }
+
+    static populateAlertVariables(message, streamData, roleToPing) {
+        let populatedMessage = message;
+        populatedMessage = populatedMessage.replace(/%u%/g, streamData.user_name);
+        populatedMessage = populatedMessage.replace(/%t%/g, streamData.title);
+        populatedMessage = populatedMessage.replace(/%r%/g, roleToPing);
+
+        return populatedMessage;
     }
 
     static getFormattedFields(gameInfo, tagsInfo) {

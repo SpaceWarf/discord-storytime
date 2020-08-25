@@ -1,6 +1,5 @@
 const { Command } = require("discord.js-commando");
 const { frumpkinPhrases, eatsPep, snapIn, snapOut, notHere } = require("../../config/frumpkin.config");
-const { Ids } = require("../../config/users.config");
 const { getRandomArrayElement } = require("../../utilities/array");
 const Emojis = require("../../config/emojis.config");
 
@@ -60,7 +59,7 @@ module.exports = class Frumpkin extends Command {
     }
 
     getRandomMessage(message) {
-        if (message.author.id === Ids.pep) {
+        if (message.author.id === this.client.users.pep) {
             return getRandomArrayElement(
                 [...frumpkinPhrases, eatsPep]
             );

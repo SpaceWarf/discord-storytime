@@ -1,5 +1,4 @@
 const { Command } = require("discord.js-commando");
-const { Ids } = require("../../config/users.config");
 const { kickPhrases, stayPhrases } = require("../../config/peru.config");
 const { getRandomArrayElement } = require("../../utilities/array");
 const Emojis = require("../../config/emojis.config");
@@ -26,7 +25,13 @@ module.exports = class Voteban extends Command {
             return [Emojis.checkmark, Emojis.xmark].includes(reaction.emoji.name);
         };
 
-        if (user && (user.id === Ids.peru || user.id === message.author.id || message.author.id === Ids.space)) {
+        if (
+            user && (
+                user.id === this.client.users.peru
+                || user.id === message.author.id
+                || message.author.id === this.client.users.space
+            )
+        ) {
             if (this.activeVote) {
                 message.channel.send("There's already an active vote! Go vote!");
                 return;
