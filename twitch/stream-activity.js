@@ -14,8 +14,8 @@ class StreamActivity {
         db.setChannelLastPingTimestamp(stream.user_name.toLowerCase());
     }
 
-    static getChannelLastPingTimestamp(stream) {
-        const channelState = db.getChannelState(stream.user_name.toLowerCase());
+    static async getChannelLastPingTimestamp(stream) {
+        const channelState = await db.getChannelState(stream.user_name.toLowerCase());
         return channelState.lastPing;
     }
 
@@ -27,17 +27,17 @@ class StreamActivity {
         db.setChannelLastOfflineTimestamp(stream.user_name.toLowerCase());
     }
 
-    static getChannelLastOfflineTimestamp(stream) {
-        const channelState = db.getChannelState(stream.user_name.toLowerCase());
+    static async getChannelLastOfflineTimestamp(stream) {
+        const channelState = await db.getChannelState(stream.user_name.toLowerCase());
         return channelState.lastSetOffline;
     }
 
-    static getOnlineChannels() {
-        return db.getChannelsByOnlineState(true);
+    static async getOnlineChannels() {
+        return await db.getChannelsByOnlineState(true);
     }
 
-    static isChannelOnline(stream) {
-        const channelState = db.getChannelState(stream.user_name.toLowerCase());
+    static async isChannelOnline(stream) {
+        const channelState = await db.getChannelState(stream.user_name.toLowerCase());
         return channelState.online;
     }
 }

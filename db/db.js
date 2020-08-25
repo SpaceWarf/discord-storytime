@@ -3,6 +3,8 @@ const DiscordConfigModel = require('./models/discord-config');
 const CustomTwitchAlertModel = require('./models/custom-twitch-alerts');
 const UserModel = require('./models/user');
 const RoleModel = require('./models/role');
+const { User } = require('discord.js');
+const user = require('./models/user');
 
 class Database {
     static async getDiscordConfig() {
@@ -41,6 +43,10 @@ class Database {
         });
 
         return rolesMap;
+    }
+
+    static async getDiscordUser(id) {
+        return await UserModel.findOne({ id });
     }
 
     static async getAllChannelStates() {

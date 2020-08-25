@@ -71,8 +71,9 @@ db.getDiscordConfig().then(async discordConfig => {
         }
     });
     
-    client.on('message', message => {
-        if ([discordUsers.peru].includes(message.author.id)) {
+    client.on('message', async message => {
+        const user = await db.getDiscordUser(message.author.id);
+        if (user && !user.nitro) {
             const emojis = Object.values(Emojis).reduce((arr, emoji) => {
                 const id = emoji.match(/:\d*>/g);
     
