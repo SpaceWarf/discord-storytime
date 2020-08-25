@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const ChannelStateModel = require('./models/channel-state');
 const DiscordConfigModel = require('./models/discord-config');
 const CustomTwitchAlertModel = require('./models/custom-twitch-alerts');
@@ -6,29 +5,11 @@ const UserModel = require('./models/user');
 const RoleModel = require('./models/role');
 
 class Database {
-    constructor() {
-        this._connect()
-    }
-
-    _connect() {
-        mongoose.set('useNewUrlParser', true);
-        mongoose.set('useUnifiedTopology', true);
-        mongoose.connect(
-            `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_SERVER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
-        )
-            .then(() => {
-                console.log('[DB] Database connection successful');
-            })
-            .catch(err => {
-                console.error('[DB] Database connection error', err);
-            });
-    }
-
-    async getDiscordConfig() {
+    static async getDiscordConfig() {
         return await DiscordConfigModel.findOne({ current: true });
     }
 
-    updateRoleAssignmentMessageConfig(id) {
+    static updateRoleAssignmentMessageConfig(id) {
         console.log(`[DB] Setting role assignment message id of current config to ${id}`);
         DiscordConfigModel.updateOne(
             { current: true },
@@ -36,11 +17,11 @@ class Database {
         ).exec();
     }
 
-    async getCustomTwitchAlerts() {
+    static async getCustomTwitchAlerts() {
         return await CustomTwitchAlertModel.find({});
     }
 
-    async getDiscordUsersMap() {
+    static async getDiscordUsersMap() {
         const users = await UserModel.find({});
         const usersMap = new Map();
 
@@ -51,7 +32,7 @@ class Database {
         return usersMap;
     }
 
-    async getDiscordRolesMap() {
+    static async getDiscordRolesMap() {
         const roles = await RoleModel.find({});
         const rolesMap = new Map();
 
@@ -62,7 +43,7 @@ class Database {
         return rolesMap;
     }
 
-    async getAllChannels() {
+    static async getAllChannels() {
         const channelStates = await ChannelStateModel
             .find({})
             .select('username')
@@ -70,7 +51,7 @@ class Database {
         return channelStates.map(channel => channel.username);
     }
 
-    setChannelState(username, online, streamData) {
+    static setChannelState(username, online, streamData) {
         console.log(`[DB] Setting user ${username} online state to ${online}`);
         ChannelStateModel.updateOne(
             { username },
@@ -78,7 +59,7 @@ class Database {
         ).exec();
     }
 
-    setChannelLastPingTimestamp(username) {
+    static setChannelLastPingTimestamp(username) {
         const now = new Date().getTime();
         console.log(`[DB] Setting user ${username} last ping timestamp to ${now}`);
         ChannelStateModel.updateOne(
@@ -87,14 +68,14 @@ class Database {
         ).exec();
     }
 
-    async getChannelLastPingTimestamp(username) {
+    static async getChannelLastPingTimestamp(username) {
         const channelState = await ChannelStateModel
             .findOne({ username })
             .select("lastPing");
         return channelState.lastPing;
     }
 
-    setChannelLastOfflineTimestamp(username) {
+    static setChannelLastOfflineTimestamp(username) {
         const now = new Date().getTime();
         console.log(`[DB] Setting user ${username} last set offline timestamp to ${now}`);
         ChannelStateModel.updateOne(
@@ -103,18 +84,18 @@ class Database {
         ).exec();
     }
 
-    async getChannelLastOfflineTimestamp(username) {
+    static async getChannelLastOfflineTimestamp(username) {
         const channelState = await ChannelStateModel
             .findOne({ username })
             .select("lastSetOffline");
         return channelState.lastSetOffline;
     }
 
-    async getChannelsByState(online) {
+    static async getChannelsByState(online) {
         return ChannelStateModel.find({ online });
     }
 
-    async isChannelOnline(username) {
+    static async isChannelOnline(username) {
         const channelState = await ChannelStateModel
             .findOne({ username })
             .select('online');
@@ -122,4 +103,4 @@ class Database {
     }
 }
 
-module.exports = new Database()
+module.exports = Database;

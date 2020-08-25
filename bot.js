@@ -1,11 +1,24 @@
 require('dotenv').config();
 const path = require('path');
 const commando = require('discord.js-commando');
+const mongoose = require('mongoose');
 const TwitchMonitor = require('./twitch/twitch-monitor');
 const StreamActivity = require('./twitch/stream-activity');
 const CustomEmbed = require('./twitch/custom-embed');
 const Emojis = require("./config/emojis.config");
 const db = require("./db/db");
+
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.connect(
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_SERVER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
+)
+    .then(() => {
+        console.log('[DB] Database connection successful');
+    })
+    .catch(err => {
+        console.error('[DB] Database connection error', err);
+    });
 
 db.getDiscordConfig().then(async discordConfig => {
     console.log('[Bot] Using following configuration: ' + discordConfig);
