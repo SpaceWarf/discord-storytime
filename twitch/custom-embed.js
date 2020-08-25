@@ -46,11 +46,20 @@ class CustomEmbed {
 
     static populateAlertVariables(message, streamData, roleToPing) {
         let populatedMessage = message;
+        populatedMessage = populatedMessage.replace(/%ue%/g, this.escapeFormatChars(streamData.user_name));
         populatedMessage = populatedMessage.replace(/%u%/g, streamData.user_name);
         populatedMessage = populatedMessage.replace(/%t%/g, streamData.title);
         populatedMessage = populatedMessage.replace(/%r%/g, roleToPing);
 
         return populatedMessage;
+    }
+
+    static escapeFormatChars(string) {
+        const charsToEscape = ["_", "*", "~"];
+        return string
+            .split("")
+            .map(char => charsToEscape.includes(char) ? `\\${char}` : char)
+            .join("");
     }
 
     static getFormattedFields(gameInfo, tagsInfo) {
