@@ -43,15 +43,21 @@ class Database {
         return rolesMap;
     }
 
-    static async getAllChannels() {
-        const channelStates = await ChannelStateModel
+    static async getAllChannelStates() {
+        return await ChannelStateModel
             .find({})
-            .select('username')
             .sort('username');
-        return channelStates.map(channel => channel.username);
     }
 
-    static setChannelState(username, online, streamData) {
+    static async getChannelState(username) {
+        return await ChannelStateModel.findOne({ username });
+    }
+
+    static async getChannelsByOnlineState(online) {
+        return ChannelStateModel.find({ online });
+    }
+
+    static setChannelOnlineState(username, online, streamData) {
         console.log(`[DB] Setting user ${username} online state to ${online}`);
         ChannelStateModel.updateOne(
             { username },
@@ -68,13 +74,6 @@ class Database {
         ).exec();
     }
 
-    static async getChannelLastPingTimestamp(username) {
-        const channelState = await ChannelStateModel
-            .findOne({ username })
-            .select("lastPing");
-        return channelState.lastPing;
-    }
-
     static setChannelLastOfflineTimestamp(username) {
         const now = new Date().getTime();
         console.log(`[DB] Setting user ${username} last set offline timestamp to ${now}`);
@@ -82,24 +81,6 @@ class Database {
             { username },
             { lastSetOffline: now }
         ).exec();
-    }
-
-    static async getChannelLastOfflineTimestamp(username) {
-        const channelState = await ChannelStateModel
-            .findOne({ username })
-            .select("lastSetOffline");
-        return channelState.lastSetOffline;
-    }
-
-    static async getChannelsByState(online) {
-        return ChannelStateModel.find({ online });
-    }
-
-    static async isChannelOnline(username) {
-        const channelState = await ChannelStateModel
-            .findOne({ username })
-            .select('online');
-        return channelState.online;
     }
 }
 

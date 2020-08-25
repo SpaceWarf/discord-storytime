@@ -2,43 +2,43 @@ const db = require("../db/db");
 
 class StreamActivity {
     static async getAllChannels() {
-        return await db.getAllChannels();
+        const channelStates = await db.getAllChannelStates();
+        return channelStates.map(channel => channel.username);
     }
 
     static setChannelOnline(stream) {
-        console.log('[StreamActivity] Setting channel online:', stream.user_name);
-        db.setChannelState(stream.user_name.toLowerCase(), true, stream);
+        db.setChannelOnlineState(stream.user_name.toLowerCase(), true, stream);
     }
 
     static setChannelLastPingTimestamp(stream) {
-        console.log('[StreamActivity] Setting channel last ping:', stream.user_name);
         db.setChannelLastPingTimestamp(stream.user_name.toLowerCase());
     }
 
     static getChannelLastPingTimestamp(stream) {
-        return db.getChannelLastPingTimestamp(stream.user_name.toLowerCase());
+        const channelState = db.getChannelState(stream.user_name.toLowerCase());
+        return channelState.lastPing;
     }
 
     static setChannelOffline(stream) {
-        console.log('[StreamActivity] Setting channel offline:', stream.user_name);
-        db.setChannelState(stream.user_name.toLowerCase(), false, {});
+        db.setChannelOnlineState(stream.user_name.toLowerCase(), false, {});
     }
 
     static setChannelLastOfflineTimestamp(stream) {
-        console.log('[StreamActivity] Setting channel last offline:', stream.user_name);
         db.setChannelLastOfflineTimestamp(stream.user_name.toLowerCase());
     }
 
     static getChannelLastOfflineTimestamp(stream) {
-        return db.getChannelLastOfflineTimestamp(stream.user_name.toLowerCase());
+        const channelState = db.getChannelState(stream.user_name.toLowerCase());
+        return channelState.lastSetOffline;
     }
 
     static getOnlineChannels() {
-        return db.getChannelsByState(true);
+        return db.getChannelsByOnlineState(true);
     }
 
     static isChannelOnline(stream) {
-        return db.isChannelOnline(stream.user_name.toLowerCase());
+        const channelState = db.getChannelState(stream.user_name.toLowerCase());
+        return channelState.online;
     }
 }
 

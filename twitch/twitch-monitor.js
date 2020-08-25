@@ -1,9 +1,9 @@
 const TwitchApi = require('./twitch-api');
-const db = require("../db/db");
+const StreamActivity = require('./stream-activity');
 
 class TwitchMonitor {
     static async start() {
-        const usernames = await db.getAllChannels();
+        const usernames = await StreamActivity.getAllChannels();
 
         setInterval(() => {
             this.refresh(usernames);
