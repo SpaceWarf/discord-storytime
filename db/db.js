@@ -3,10 +3,21 @@ const DiscordConfigModel = require('./models/discord-config');
 const CustomTwitchAlertModel = require('./models/custom-twitch-alerts');
 const UserModel = require('./models/user');
 const RoleModel = require('./models/role');
-const { User } = require('discord.js');
-const user = require('./models/user');
+const DataStateModel = require('./models/data-state');
 
 class Database {
+    static async getDataState() {
+        return await DataStateModel.findOne({ current: true });
+    }
+
+    static updateFrumpkinState(frumpkin) {
+        console.log(`[DB] Setting frumpkin state to ${frumpkin}`);
+        DataStateModel.updateOne(
+            { current: true },
+            { frumpkin }
+        ).exec();
+    }
+
     static async getDiscordConfig() {
         return await DiscordConfigModel.findOne({ current: true });
     }

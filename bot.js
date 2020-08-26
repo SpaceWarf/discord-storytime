@@ -22,6 +22,10 @@ mongoose.connect(
 
 db.getDiscordConfig().then(async discordConfig => {
     console.log('[Bot] Using following configuration: ' + discordConfig);
+
+    const dataState = await db.getDataState();
+    console.log('[Bot] Using following data state: ' + dataState);
+
     const customTwitchAlerts = await db.getCustomTwitchAlerts();
     const discordUsers = await db.getDiscordUsersMap();
     const discordRoles = await db.getDiscordRolesMap();
@@ -34,6 +38,7 @@ db.getDiscordConfig().then(async discordConfig => {
     });
 
     client.users = discordUsers;
+    client.dataState = dataState;
     
     client.registry
         .registerDefaultTypes()

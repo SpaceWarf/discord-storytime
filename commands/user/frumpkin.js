@@ -1,7 +1,7 @@
 const { Command } = require("discord.js-commando");
 const { frumpkinPhrases, eatsPep, snapIn, snapOut, notHere } = require("../../config/frumpkin.config");
 const { getRandomArrayElement } = require("../../utilities/array");
-const Emojis = require("../../config/emojis.config");
+const db = require("../../db/db");
 
 module.exports = class Frumpkin extends Command {
     constructor(client) {
@@ -16,7 +16,7 @@ module.exports = class Frumpkin extends Command {
             }
         });
 
-        this.exists = false;
+        this.exists = this.client.dataState.frumpkin;
     }
 
     async run(message) {
@@ -48,6 +48,7 @@ module.exports = class Frumpkin extends Command {
 
     executeSnap(message) {
         this.exists = !this.exists;
+        db.updateFrumpkinState(this.exists);
 
         if (this.exists) {
             message.say(
