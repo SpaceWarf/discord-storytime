@@ -63,7 +63,7 @@ class Database {
     static async getAllChannelStates() {
         return await ChannelStateModel
             .find({})
-            .sort('order');
+            .sort([["order", 1], ["username", 1]]);
     }
 
     static async getChannelState(username) {
