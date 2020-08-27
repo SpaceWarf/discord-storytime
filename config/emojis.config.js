@@ -123,6 +123,10 @@ module.exports = {
     letter_u_3: "<:regional_indicator_u_3:748666968730632313>",
     letter_v_3: "<:regional_indicator_v_3:748666968684626040>",
     letter_w_3: "<:regional_indicator_w_3:748666968768380928>",
-    letter_y_3: "<:regional_indicator_y_3:748666968730763314>"    
+    letter_y_3: "<:regional_indicator_y_3:748666968730763314>",
+    letter__: "<:regional_indicator:748676229984682005>", 
+    letter___2: "<:regionalindicator2:748676229812584538>", 
+    letter___3: "<:regional_indicator_3:748676229871435826>", 
+    letter___4: "<:regionalindicator4:748676229791744112>"
 }
 

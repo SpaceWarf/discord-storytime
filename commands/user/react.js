@@ -30,8 +30,8 @@ module.exports = class List extends Command {
             const emojis = this.getEmojisFromText(text);
             await message.delete();
 
-            emojis.forEach(emoji => {
-                msgToReact.react(emoji);
+            emojis.forEach(async emoji => {
+                await msgToReact.react(emoji);
             });
         }
     }
