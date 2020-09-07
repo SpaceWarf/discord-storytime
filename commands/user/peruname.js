@@ -18,7 +18,7 @@ module.exports = class Live extends Command {
             || message.author.id === this.client.users.peru
         ) {
             const username = message.content
-                .replace("~peruname", "")
+                .replace(`${this.client.commandPrefix}peruname`, "")
                 .trim();
             if (username) {
                 db.setPeruname(username);

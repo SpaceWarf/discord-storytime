@@ -39,6 +39,7 @@ db.getDiscordConfig().then(async discordConfig => {
 
     client.users = discordUsers;
     client.dataState = dataState;
+    client.commandPrefix = discordConfig.commandPrefix;
     
     client.registry
         .registerDefaultTypes()
