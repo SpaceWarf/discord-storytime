@@ -71,7 +71,7 @@ class Database {
     }
 
     static async getChannelsByOnlineState(online) {
-        return ChannelStateModel.find({ online });
+        return await ChannelStateModel.find({ online });
     }
 
     static setChannelOnlineState(username, online, streamData) {
@@ -97,6 +97,14 @@ class Database {
         ChannelStateModel.updateOne(
             { username },
             { lastSetOffline: now }
+        ).exec();
+    }
+
+    static setPeruname(username) {
+        console.log(`[DB] Setting username for Peruman to ${username}`);
+        DataStateModel.updateOne(
+            { current: true },
+            { peruname: username }
         ).exec();
     }
 }

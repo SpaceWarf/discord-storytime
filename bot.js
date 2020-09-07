@@ -71,8 +71,8 @@ db.getDiscordConfig().then(async discordConfig => {
     client.on('guildMemberAdd', member => {
         if (member.id === discordUsers.peru) {
             member.setRoles([discordRoles.punchingBag]);
-            member.setNickname("Peruman-faced stink bug");
-            console.log(`[Bot] Set role and nickname of Peruman`);
+            member.setNickname(dataState.peruname);
+            console.log(`[Bot] Set role and nickname of Peruman to ${dataState.peruname}`);
         }
     });
     
