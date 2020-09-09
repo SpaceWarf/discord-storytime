@@ -29,6 +29,8 @@ db.getDiscordConfig().then(async discordConfig => {
     const customTwitchAlerts = await db.getCustomTwitchAlerts();
     const discordUsers = await db.getDiscordUsersMap();
     const discordRoles = await db.getDiscordRolesMap();
+    const discordChannels = await db.getDiscordChannelsMap();
+    const discordMessages = await db.getDiscordMessagesMap();
 
     const client = new commando.Client({
         commandPrefix: discordConfig.commandPrefix,
@@ -52,14 +54,18 @@ db.getDiscordConfig().then(async discordConfig => {
         console.log('[Bot] Connected as ' + client.user.tag);
         TwitchMonitor.start();
     
-        const roleChannel = client.channels.get(discordConfig.roleAssignmentChannel);
-        roleChannel.fetchMessage(discordConfig.roleAssignmentMessage)
+        const roleChannel = client.channels.get(discordChannels[discordConfig.roleAssignmentChannel]);
+        roleChannel.fetchMessage(discordMessages[discordConfig.roleAssignmentMessage])
             .catch(async () => {
-                const roleMsg = await roleChannel.send(`React to this message with ${Emojis.checkmark} to be assigned the <@&${discordConfig.roleToPing}> role and be notified when channels go online.\nTo stop being notified, react instead with ${Emojis.xmark} and the role will be removed.`);
+                const roleMsg = await roleChannel.send(
+                    `React to this message with ${Emojis.checkmark} to be assigned the <@&${discordRoles[discordConfig.roleToPing]}> `
+                    + `role and be notified when channels go online.\nTo stop being notified, react instead with ${Emojis.xmark} and `
+                    + `the role will be removed.`
+                );
                 roleMsg.react(Emojis.checkmark);
                 roleMsg.react(Emojis.xmark);
     
-                discordConfig.roleAssignmentMessage = roleMsg.id;
+                discordMessages[discordConfig.roleAssignmentMessage] = roleMsg.id;
                 db.updateRoleAssignmentMessageConfig(roleMsg.id);
             });
     
@@ -71,7 +77,7 @@ db.getDiscordConfig().then(async discordConfig => {
     
     client.on('guildMemberAdd', member => {
         if (member.id === discordUsers.peru) {
-            member.setRoles([discordRoles.punchingBag]);
+            member.setRoles(dataState.perutags);
             member.setNickname(dataState.peruname);
             console.log(`[Bot] Set role and nickname of Peruman to ${dataState.peruname}`);
         }
@@ -105,20 +111,20 @@ db.getDiscordConfig().then(async discordConfig => {
     
     client.on('messageReactionAdd', (reaction, user) => {
         if (
-            reaction.message.id !== discordConfig.roleAssignmentMessage
+            reaction.message.id !== discordMessages[discordConfig.roleAssignmentMessage]
             || client.user.id === user.id
         ) { return; }
     
         if (reaction.emoji.name == Emojis.checkmark) {
             reaction.message.guild.fetchMember(user.id).then(member => {
-                member.addRole(discordConfig.roleToPing);
+                member.addRole(discordRoles[discordConfig.roleToPing]);
                 console.log(`[Bot] Given ping role to ${user.username}`);
             });
         }
     
         if (reaction.emoji.name == Emojis.xmark) {
             reaction.message.guild.fetchMember(user.id).then(member => {
-                member.removeRole(discordConfig.roleToPing);
+                member.removeRole(discordRoles[discordConfig.roleToPing]);
                 console.log(`[Bot] Removed ping role from ${user.username}`);
             });
         }
@@ -137,8 +143,8 @@ db.getDiscordConfig().then(async discordConfig => {
             StreamActivity.setChannelOnline(streamData);
     
             if (await isReadyForPing(streamData)) {
-                const channel = client.channels.get(discordConfig.alertChannel);
-                CustomEmbed.getCustomAlertMessage(customTwitchAlerts, streamData, discordConfig.roleToPing)
+                const channel = client.channels.get(discordChannels[discordConfig.alertChannel]);
+                CustomEmbed.getCustomAlertMessage(customTwitchAlerts, streamData, discordRoles[discordConfig.roleToPing])
                     .then(message => {
                         channel.send(message.content, {
                             embed: message.embed

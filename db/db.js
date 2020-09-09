@@ -3,6 +3,8 @@ const DiscordConfigModel = require('./models/discord-config');
 const CustomTwitchAlertModel = require('./models/custom-twitch-alerts');
 const UserModel = require('./models/user');
 const RoleModel = require('./models/role');
+const ChannelModel = require('./models/channel');
+const MessageModel = require('./models/message');
 const DataStateModel = require('./models/data-state');
 
 class Database {
@@ -35,10 +37,9 @@ class Database {
     }
 
     static async getDiscordUsersMap() {
-        const users = await UserModel.find({});
         const usersMap = new Map();
 
-        users.forEach(user => {
+        (await UserModel.find({})).forEach(user => {
             usersMap[user.username] = user.id;
         });
 
@@ -46,14 +47,33 @@ class Database {
     }
 
     static async getDiscordRolesMap() {
-        const roles = await RoleModel.find({});
         const rolesMap = new Map();
 
-        roles.forEach(role => {
+        (await RoleModel.find({})).forEach(role => {
             rolesMap[role.name] = role.id;
         });
 
         return rolesMap;
+    }
+
+    static async getDiscordChannelsMap() {
+        const channelsMap = new Map();
+
+        (await ChannelModel.find({})).forEach(channel => {
+            channelsMap[channel.name] = channel.id;
+        });
+
+        return channelsMap;
+    }
+
+    static async getDiscordMessagesMap() {
+        const messagesMap = new Map();
+
+        (await MessageModel.find({})).forEach(message => {
+            messagesMap[message.name] = message.id;
+        });
+
+        return messagesMap;
     }
 
     static async getDiscordUser(id) {
