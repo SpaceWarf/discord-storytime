@@ -1,4 +1,5 @@
 require('dotenv').config();
+const express = require('express');
 const path = require('path');
 const commando = require('discord.js-commando');
 const mongoose = require('mongoose');
@@ -7,6 +8,9 @@ const StreamActivity = require('./twitch/stream-activity');
 const CustomEmbed = require('./twitch/custom-embed');
 const Emojis = require("./config/emojis.config");
 const db = require("./db/db");
+
+const app = express();
+app.use(express.static('public'));
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
