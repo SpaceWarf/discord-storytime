@@ -21,6 +21,7 @@ module.exports = class Join extends Command {
         } else {
             this.client.connection = await this.client.channels.get(voiceChannel).join();
             this.client.connection.playFile(getFile('cheesed'));
+            console.log('[Bot] playing cheesed audio sound.');
         }
     }
 }

@@ -23,6 +23,7 @@ module.exports = class Say extends Command {
             message.say("You need to be in the bot's voice channel to use this command.");
         } else {
             this.client.connection.playFile(getFile("reeeeeeeeee"));
+            console.log('[Bot] playing reeeeeeeeee audio sound.');
 
             const context = this;
             setTimeout(async () => {
