@@ -12,6 +12,8 @@ module.exports = class Join extends Command {
     }
 
     async run(message) {
+        // Command under development.
+        return;
         const voiceChannel = message.member.voiceChannelID;
 
         if (this.connection) {

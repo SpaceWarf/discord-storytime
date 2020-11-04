@@ -23,6 +23,7 @@ module.exports = class Live extends Command {
             if (username) {
                 db.setPeruname(username);
                 this.client.dataState.peruname = username;
+                message.say(`Username updated to: ${username}`);
             } else {
                 message.say(`Invalid username ${Emojis.bonkCat}`);
             }

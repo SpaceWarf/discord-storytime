@@ -12,6 +12,8 @@ module.exports = class Say extends Command {
     }
 
     async run(message) {
+        // Command under development.
+        return;
         const clientVoiceChannel = message.member.voiceChannelID;
         const botVoiceChannel = this.client.connection
             ? this.client.connection.channel.id
