@@ -41,7 +41,7 @@ module.exports = class Help extends Command {
                     },
                     {
                         "name": "Other",
-                        "value": "`!voteban <user>`\nStart a vote to ban a user\nYou can only start a vote on Peruman or yourself\n\nMeowtron's code is freely available [here](https://github.com/SpaceWarf/meowtron-6000)."
+                        "value": "`!voteban <user>`\nStart a vote to ban a user\nYou can only start a vote on Peruman or yourself\n\n`!vibecheck`\nVibecheck!\n\nMeowtron's code is freely available [here](https://github.com/SpaceWarf/meowtron-6000)."
                     }
                 ]
             }
