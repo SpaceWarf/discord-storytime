@@ -130,16 +130,20 @@ class Database {
 
     static async getUserAttributes(id) {
         const user = await UserModel.findOne({ id });
-        return user.attributes;
+        return user
+            ? user.attributes
+            : {};
     }
 
     static async getUserCharacter(id) {
         const user = await UserModel.findOne({ id });
-        return {
-            race: user.race,
-            class: user.class,
-            attributes: user.attributes
-        };
+        return user
+            ? {
+                race: user.race,
+                class: user.class,
+                attributes: user.attributes
+            }
+            : {};
     }
 }
 
