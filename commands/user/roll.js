@@ -1,6 +1,7 @@
 const { Command } = require("discord.js-commando");
 const { DiceRoll, exportFormats } = require("rpg-dice-roller");
 const Emojis = require ("../../config/emojis.config");
+const db = require("../../db/db");
 
 module.exports = class Live extends Command {
     constructor(client) {
@@ -13,7 +14,8 @@ module.exports = class Live extends Command {
     }
 
     async run(message) {
-        const rollSyntax = message.content.split(" ")[1];
+        const attributes = await db.getUserAttributes(message.author.id);
+        const rollSyntax = this.attributeParser(message.content.split(" ")[1], attributes);
         try {
             const roll = new DiceRoll(rollSyntax);
             const rollObj = roll.export(exportFormats.OBJECT);
@@ -21,6 +23,11 @@ module.exports = class Live extends Command {
         } catch (err) {
             message.say(`Invalid roll syntax ${Emojis.bonkCat}`);
         }
+    }
+
+    attributeParser(rollSyntax, attributes) {
+        const regex = /(?<=\*|\+|\-|\/)(str|dex|con|int|wis|cha)(?=\*|\+|\-|\/)*/g;
+        return rollSyntax.replace(regex, match => (attributes[match] || 0));
     }
 
     getRollsString(rolls) {

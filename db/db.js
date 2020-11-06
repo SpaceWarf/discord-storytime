@@ -127,6 +127,11 @@ class Database {
             { peruname: username }
         ).exec();
     }
+
+    static async getUserAttributes(id) {
+        const user = await UserModel.findOne({ id });
+        return user.attributes;
+    }
 }
 
 module.exports = Database;
