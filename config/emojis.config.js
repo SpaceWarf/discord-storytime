@@ -46,6 +46,7 @@ module.exports = {
     baseballbat: "<:baseballbat:739832693352693840>",
     angrytom: "<:angrytom:739832263461699585>",
     dancingbaby: "<a:dancingbaby:740683839009194004>",
+    thanos: "<:thanos:774145208795004948>",
     checkmark: "✅",
     xmark: "❌",
     letter_a: "🇦",
