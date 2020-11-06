@@ -69,9 +69,6 @@ module.exports = class Live extends Command {
             return `${name} - ${character.race}`;
         }
         
-        if (!character.race && !character.class) {
-            return name;
-        }
-
+        return name;
     }
 }
