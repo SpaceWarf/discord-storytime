@@ -8,20 +8,14 @@ module.exports = class Live extends Command {
             name: "r",
             group: "user",
             memberName: "roll",
-            description: "Roll dice to get a random result.",
-            args: [
-                {
-                    key: "dice",
-                    prompt: "Which dice do you want to roll?",
-                    type: "string"
-                }
-            ]
+            description: "Roll dice to get a random result."
         });
     }
 
-    async run(message, { dice }) {
+    async run(message) {
+        const rollSyntax = message.content.split(" ")[1];
         try {
-            const roll = new DiceRoll(dice);
+            const roll = new DiceRoll(rollSyntax);
             const rollObj = roll.export(exportFormats.OBJECT);
             message.say(`Rolls: ${this.getRollsString(rollObj.rolls)}\nTotal: **${rollObj.total}**`);
         } catch (err) {
