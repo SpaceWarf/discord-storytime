@@ -1,6 +1,4 @@
 const { Command } = require("discord.js-commando");
-const { DiceRoll, exportFormats } = require("rpg-dice-roller");
-const Emojis = require ("../../config/emojis.config");
 const db = require("../../db/db");
 
 module.exports = class Live extends Command {
@@ -14,7 +12,66 @@ module.exports = class Live extends Command {
     }
 
     async run(message) {
-        const attributes = await db.getUserAttributes(message.author.id);
-        message.say(`Strength: ${attributes.str || 0}\nDexterity: ${attributes.dex || 0}\nConstitution: ${attributes.con || 0}\nIntelligence: ${attributes.int || 0}\nWisdom: ${attributes.wis || 0}\nCharisma: ${attributes.cha || 0}`);
+        const character = await db.getUserCharacter(message.author.id);
+        message.channel.send({
+            "embed": {
+                "color": 3447003,
+                "author": {
+                    "name": this.getSheetTitle(message.author.username, character),
+                    "icon_url": message.author.avatarURL
+                },
+                "fields": [
+                    {
+                        "name": "Strength",
+                        "value": character.attributes.str || 0,
+                        inline: true
+                    },
+                    {
+                        "name": "Dexterity",
+                        "value": character.attributes.dex || 0,
+                        inline: true
+                    },
+                    {
+                        "name": "Constitution",
+                        "value": character.attributes.con || 0,
+                        inline: true
+                    },
+                    {
+                        "name": "Intelligence",
+                        "value": character.attributes.int || 0,
+                        inline: true
+                    },
+                    {
+                        "name": "Wisdom",
+                        "value": character.attributes.wis || 0,
+                        inline: true
+                    },
+                    {
+                        "name": "Charisma",
+                        "value": character.attributes.cha || 0,
+                        inline: true
+                    }
+                ]
+            }
+        });
+    }
+
+    getSheetTitle(name, character) {
+        if (character.race && character.class) {
+            return `${name} - ${character.race} ${character.class}`;
+        }
+
+        if (!character.race && character.class) {
+            return `${name} - ${character.class}`;
+        }
+
+        if (!character.class && character.race) {
+            return `${name} - ${character.race}`;
+        }
+        
+        if (!character.race && !character.class) {
+            return name;
+        }
+
     }
 }

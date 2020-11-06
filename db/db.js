@@ -132,6 +132,15 @@ class Database {
         const user = await UserModel.findOne({ id });
         return user.attributes;
     }
+
+    static async getUserCharacter(id) {
+        const user = await UserModel.findOne({ id });
+        return {
+            race: user.race,
+            class: user.class,
+            attributes: user.attributes
+        };
+    }
 }
 
 module.exports = Database;

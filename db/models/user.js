@@ -11,7 +11,9 @@ var userSchema = new mongoose.Schema({
         int: Number,
         wis: Number,
         cha: Number
-    }
+    },
+    race: String,
+    class: String
 });
 
 module.exports = mongoose.model('users', userSchema);
