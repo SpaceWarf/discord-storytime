@@ -37,7 +37,7 @@ module.exports = class Help extends Command {
                     },
                     {
                         "name": "Dice Roller",
-                        "value": "`!r <rollSyntax>`\nRoll dice to get a random result.\nhttps://greenimp.github.io/rpg-dice-roller/guide/notation/\n\n`!vibecheck`\nVibecheck!\n\n`!peepeepoopoocheck`\nPeepee Poopoo check.\n⠀"
+                        "value": "`!r <rollSyntax>`\nRoll dice to get a random result.\nhttps://greenimp.github.io/rpg-dice-roller/guide/notation/\n\n`!vibecheck`\nVibecheck!\n\n`!peepeepoopoocheck`\nPeepee Poopoo check.\n\n`!attributes`\nCheck your attributes\n⠀"
                     },
                     {
                         "name": "Other",

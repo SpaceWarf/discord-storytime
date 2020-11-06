@@ -16,6 +16,10 @@ module.exports = class Live extends Command {
     async run(message) {
         const attributes = await db.getUserAttributes(message.author.id);
         const rollSyntax = this.attributeParser(message.content.split(" ")[1], attributes);
+        if (rollSyntax === "9+10") {
+            message.say(`Rolls: 9 + 10\nTotal: **21**`);
+            return;
+        }
         try {
             const roll = new DiceRoll(rollSyntax);
             const rollObj = roll.export(exportFormats.OBJECT);
