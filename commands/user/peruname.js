@@ -14,8 +14,8 @@ module.exports = class Live extends Command {
 
     async run(message) {
         if (
-            message.author.id === this.client.users.space
-            || message.author.id === this.client.users.peru
+            message.author.id === this.client.discordUsers.space
+            || message.author.id === this.client.discordUsers.peru
         ) {
             const username = message.content
                 .replace(`${this.client.commandPrefix}peruname`, "")

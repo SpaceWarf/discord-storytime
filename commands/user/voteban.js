@@ -27,9 +27,9 @@ module.exports = class Voteban extends Command {
 
         if (
             user && (
-                user.id === this.client.users.peru
+                user.id === this.client.discordUsers.peru
                 || user.id === message.author.id
-                || message.author.id === this.client.users.space
+                || message.author.id === this.client.discordUsers.space
             )
         ) {
             if (this.activeVote) {

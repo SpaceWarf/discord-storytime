@@ -20,7 +20,7 @@ module.exports = class Speak extends Command {
             : undefined;
 
         if (clientVoiceChannel && !botVoiceChannel) {
-            this.client.connection = await this.client.channels.get(clientVoiceChannel).join();
+            this.client.connection = await this.client.channels.fetch(clientVoiceChannel).join();
             this.client.connection.playFile(getFile('cheesed'));
             console.log('[Bot] playing cheesed audio sound.');
         } else if (!clientVoiceChannel || botVoiceChannel !== clientVoiceChannel) {

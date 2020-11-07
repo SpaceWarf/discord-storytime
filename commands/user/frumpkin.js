@@ -60,7 +60,7 @@ module.exports = class Frumpkin extends Command {
     }
 
     getRandomMessage(message) {
-        if (message.author.id === this.client.users.pep) {
+        if (message.author.id === this.client.discordUsers.pep) {
             return getRandomArrayElement(
                 [...frumpkinPhrases, eatsPep]
             );

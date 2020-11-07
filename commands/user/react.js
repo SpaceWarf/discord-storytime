@@ -25,8 +25,8 @@ module.exports = class List extends Command {
     }
 
     async run(message, { text, id }) {
-        if (message.author.id === this.client.users.space) {
-            const msgToReact = await message.channel.fetchMessage(id);
+        if (message.author.id === this.client.discordUsers.space) {
+            const msgToReact = await message.channel.messages.fetch(id);
             const emojis = this.getEmojisFromText(text);
             await message.delete();
 

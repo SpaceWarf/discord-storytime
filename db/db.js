@@ -26,9 +26,9 @@ class Database {
 
     static updateRoleAssignmentMessageConfig(id) {
         console.log(`[DB] Setting role assignment message id of current config to ${id}`);
-        DiscordConfigModel.updateOne(
-            { current: true },
-            { roleAssignmentMessage: id }
+        MessageModel.updateOne(
+            { name: "roleAssignment" },
+            { id }
         ).exec();
     }
 

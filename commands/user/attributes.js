@@ -18,7 +18,7 @@ module.exports = class Live extends Command {
                 "color": 3447003,
                 "author": {
                     "name": this.getSheetTitle(message.author.username, character),
-                    "icon_url": message.author.avatarURL
+                    "icon_url": message.author.avatarURL()
                 },
                 "fields": [
                     {

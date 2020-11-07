@@ -26,12 +26,12 @@ module.exports = class Pep8 extends Command {
     }
 
     async run(message) {
-        if (message.author.id === this.client.users.peru && Math.random() <= fatFuckChance) {
+        if (message.author.id === this.client.discordUsers.peru && Math.random() <= fatFuckChance) {
             message.say(peruMsg);
             return;
         }
 
-        if (message.author.id === this.client.users.pep && Math.random() <= sassChance) {
+        if (message.author.id === this.client.discordUsers.pep && Math.random() <= sassChance) {
             message.say(getRandomArrayElement(peptronSass));
             return;
         }

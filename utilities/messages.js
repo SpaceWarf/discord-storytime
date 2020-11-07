@@ -1,5 +1,5 @@
 const getMessagesForUser = async (channel, userId) => {
-  let messages = await channel.fetchMessages();
+  let messages = await channel.messages.fetch();
   return messages.filter(message => message.author.id === userId);
 }
 

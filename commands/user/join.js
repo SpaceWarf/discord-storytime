@@ -21,7 +21,7 @@ module.exports = class Join extends Command {
         } else if (!voiceChannel) {
             message.say("You need to be in a voice channel to use this command.");
         } else {
-            this.client.connection = await this.client.channels.get(voiceChannel).join();
+            this.client.connection = await this.client.channels.fetch(voiceChannel).join();
             this.client.connection.playFile(getFile('cheesed'));
             console.log('[Bot] playing cheesed audio sound.');
         }
