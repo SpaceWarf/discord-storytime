@@ -18,7 +18,7 @@ module.exports = class Voteban extends Command {
         this.activeVote = false;
     }
 
-    async run({ message }) {
+    async run(message) {
         const user = message.mentions.members.first();
 
         const filter = reaction => {
