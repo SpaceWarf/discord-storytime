@@ -20,6 +20,8 @@ module.exports = class Live extends Command {
         message.say(`Peepee: ${peepeeStr}\nPoopoo: ${poopooStr}`);
         if (peepee.total === 20 && poopoo.total === 20) {
             message.say(`I bequeath you the Peepee Poopoo God title ${Emojis.bobDance}`);
+        } else if (peepee.total === 1 && poopoo.total === 1) {
+            message.say(`...damn ${Emojis.sadChamp}`);
         } else if (peepee.total === poopoo.total) {
             message.say(`Perfectly balanced, as all things should be ${Emojis.thanos}`);
         } else if (peepee.total === 6 && poopoo.total === 9) {
