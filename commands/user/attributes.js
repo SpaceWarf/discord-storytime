@@ -23,32 +23,32 @@ module.exports = class Live extends Command {
                 "fields": [
                     {
                         "name": "Strength",
-                        "value": character.attributes.str || 0,
+                        "value": character.attributes.str,
                         inline: true
                     },
                     {
                         "name": "Dexterity",
-                        "value": character.attributes.dex || 0,
+                        "value": character.attributes.dex,
                         inline: true
                     },
                     {
                         "name": "Constitution",
-                        "value": character.attributes.con || 0,
+                        "value": character.attributes.con,
                         inline: true
                     },
                     {
                         "name": "Intelligence",
-                        "value": character.attributes.int || 0,
+                        "value": character.attributes.int,
                         inline: true
                     },
                     {
                         "name": "Wisdom",
-                        "value": character.attributes.wis || 0,
+                        "value": character.attributes.wis,
                         inline: true
                     },
                     {
                         "name": "Charisma",
-                        "value": character.attributes.cha || 0,
+                        "value": character.attributes.cha,
                         inline: true
                     }
                 ]

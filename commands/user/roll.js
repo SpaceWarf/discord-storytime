@@ -31,7 +31,7 @@ module.exports = class Live extends Command {
 
     attributeParser(rollSyntax, attributes) {
         const regex = /(?<=\*|\+|\-|\/)(str|dex|con|int|wis|cha)(?=\*|\+|\-|\/)*/g;
-        return rollSyntax.replace(regex, match => (attributes[match] || 0));
+        return rollSyntax.replace(regex, match => attributes[match]);
     }
 
     getRollsString(rolls) {
