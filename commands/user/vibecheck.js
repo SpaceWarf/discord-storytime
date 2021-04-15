@@ -13,16 +13,15 @@ module.exports = class Live extends Command {
     }
 
     async run(message, { dice }) {
-        message.say(`20 ${Emojis.dogdance} (I'm, a stupid little robot and need to learn my place)`);
-//       const roll = new DiceRoll("d20");
-//       if (roll.total === 20) {
-//         message.say(`${roll.total} ${Emojis.dogdance}`);
-//       } else if (roll.total === 1) {
-//         message.say(`${roll.total} ${Emojis.crycat}`);
-//       } else if (roll.total > 10) {
-//         message.say(`${roll.total} ${Emojis.dancingbaby}`);
-//       } else {
-//         message.say(`${roll.total} ${Emojis.ocry}`);
-//       }
+      const roll = new DiceRoll("d20");
+      if (roll.total === 20) {
+        message.say(`${roll.total} ${Emojis.dogdance}`);
+      } else if (roll.total === 1) {
+        message.say(`${roll.total} ${Emojis.crycat}`);
+      } else if (roll.total > 10) {
+        message.say(`${roll.total} ${Emojis.dancingbaby}`);
+      } else {
+        message.say(`${roll.total} ${Emojis.ocry}`);
+      }
     }
 }
