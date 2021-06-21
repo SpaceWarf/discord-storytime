@@ -19,7 +19,7 @@ These commands help bring visibility our stream team. Meowtron also notifies the
 **!streams**: List all the streamers (live or not).
 
 ### Dice Roller  
-These commands provide a way to roll dice and get random results. Emulates the behavior of online TTRPG dice rollers.
+These commands provide a way to roll dice and get random results. Emulates the behavior of online TTRPG dice rollers.  
 ⠀
 **!r <rollSyntax>**: Roll dice to get a random result. https://greenimp.github.io/rpg-dice-roller/guide/notation/  
 **!attributes**: Check the attributes that can be used in dice rolls. Uses the standard D&d attributes.  
